@@ -1,0 +1,4 @@
+# STAGING BUILD. Not for indexing.
+# Restore the production file with:  python3 set-host.py <host> --production
+User-agent: *
+Disallow: /

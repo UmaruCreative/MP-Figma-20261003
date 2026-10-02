@@ -1,0 +1,44 @@
+# MP Doors
+
+> Composite and fiberglass entry and patio doors, made in the USA since 2004 and sold through The Home Depot. Every door is built on a 100% waterproof composite frame with a six sided HydroShield seal, and is ENERGY STAR certified across all four United States climate zones.
+
+Shipped on the evidence in spec file 04: no AI crawler is blocked, and this file is a convenience rather than a coverage claim.
+
+## Collection
+
+- [Fiberglass Entry Doors](https://umarucreative.github.io/MPDoors-Final-20260828/entry-doors/): Browse all 10 MP Doors fiberglass front door styles, craftsman to contemporary, on waterproof composite frames. Energy Star certified. At The Home Depot.
+- [Composite Patio Doors](https://umarucreative.github.io/MPDoors-Final-20260828/patio-doors/): Compare MP Doors composite patio doors: gliding sliding models, hinged French pairs and an HVHZ impact rated door. 100% waterproof. At The Home Depot.
+- [Gliding Patio Doors](https://umarucreative.github.io/MPDoors-Final-20260828/patio-doors/gliding/): MP Doors gliding patio doors: composite sliding doors on stainless steel rollers, in 2 Panel and 3/4 Lite. Low-E glass, DP50 rated. At The Home Depot.
+- [Hinged and French Patio Doors](https://umarucreative.github.io/MPDoors-Final-20260828/patio-doors/hinged/): MP Doors hinged French patio doors in Full Lite, 3/4 Lite and HVHZ impact. Both panels open on ball-bearing hinges, inswing or outswing. At The Home Depot.
+
+## Entry doors
+
+- [3/4 Lite Entry Door](https://umarucreative.github.io/MPDoors-Final-20260828/entry-doors/3-4-lite/): MP Doors 3/4 Lite entry door with decorative glass and rich woodgrain finishes on a waterproof composite frame. Limited lifetime warranty. At The Home Depot.
+- [3/4 Oval Lite Entry Door](https://umarucreative.github.io/MPDoors-Final-20260828/entry-doors/3-4-oval-lite/): MP Doors 3/4 Oval Lite entry door: timeless curb appeal from a refined oval insert, in Medium Oak or Light Oak. Four glass patterns. At The Home Depot.
+- [3 Lite Entry Door](https://umarucreative.github.io/MPDoors-Final-20260828/entry-doors/3-lite/): MP Doors 3 Lite entry door: three broad horizontal lites in a mid-century modern profile, in White or Black. Four glass options at The Home Depot.
+- [4 Lite Entry Door](https://umarucreative.github.io/MPDoors-Final-20260828/entry-doors/4-lite/): MP Doors 4 Lite entry door: four horizontal lites in Water Wave or Frosted glass, White or Black. Will not rot, warp or rust. At The Home Depot.
+- [Contemporary Teak Entry Door](https://umarucreative.github.io/MPDoors-Final-20260828/entry-doors/contemporary-teak/): MP Doors Contemporary Teak entry door brings a warm teak tone finish to modern lines, on composite that never needs refinishing. At The Home Depot.
+- [Craftsman Entry Door](https://umarucreative.github.io/MPDoors-Final-20260828/entry-doors/craftsman/): MP Doors Craftsman entry door: straight edge panel and glazing bead, four woodgrain and smooth finishes, three glass options. At The Home Depot.
+- [Full Lite Entry Door](https://umarucreative.github.io/MPDoors-Final-20260828/entry-doors/full-lite/): MP Doors Full Lite entry door: a full glass panel in White composite with Savana, Scotia or blinds between glass. Tilt, raise, lower. At The Home Depot.
+- [1/2 Lite Entry Door](https://umarucreative.github.io/MPDoors-Final-20260828/entry-doors/half-lite/): MP Doors 1/2 Lite entry door: half glass over 100% waterproof composite in a 36 in. width. Savana, Scotia or blinds between glass. At The Home Depot.
+- [Modern Full Lite Entry Door](https://umarucreative.github.io/MPDoors-Final-20260828/entry-doors/modern-full-lite/): MP Doors Modern Full Lite entry door: full glass on a HydroShield composite frame that holds its finish. Energy Star certified. At The Home Depot.
+- [Narrow Lite Entry Door](https://umarucreative.github.io/MPDoors-Final-20260828/entry-doors/narrow-lite/): MP Doors Narrow Lite entry door: a slim vertical insert in Water Wave, Radiant or Frosted glass. Daylight without losing privacy. At The Home Depot.
+
+## Patio doors
+
+- [2 Panel Gliding Patio Door](https://umarucreative.github.io/MPDoors-Final-20260828/patio-doors/gliding/2-panel/): MP Doors 2 Panel gliding patio door: a full glass composite sliding door, DP50 rated with Low-E standard and ENERGY STAR in all four zones. At The Home Depot.
+- [3/4 Lite Gliding Patio Door](https://umarucreative.github.io/MPDoors-Final-20260828/patio-doors/gliding/3-4-lite/): MP Doors 3/4 Lite gliding patio door: a composite sliding door in 60 by 80 and 72 by 80, with a shaker lower panel and stainless rollers. At The Home Depot.
+- [Full Lite Hinged Patio Door](https://umarucreative.github.io/MPDoors-Final-20260828/patio-doors/hinged/full-lite/): MP Doors Full Lite hinged French patio door: floor to ceiling glass, both panels operable, inswing or outswing, rated PG55 outswing. At The Home Depot.
+- [3/4 Lite Hinged Patio Door](https://umarucreative.github.io/MPDoors-Final-20260828/patio-doors/hinged/3-4-lite/): MP Doors 3/4 Lite hinged patio door: glass over a solid bottom panel, two sizes, inswing or outswing, three glass styles. At The Home Depot.
+- [HVHZ Impact Patio Door](https://umarucreative.github.io/MPDoors-Final-20260828/patio-doors/hinged/impact-full-lite/): MP Doors HVHZ impact hinged patio door: Florida approval FL-29714.2, impact Low-E glass, DP50 rated, outswing only. Hurricane ready, at The Home Depot.
+
+## Guidance
+
+- [Why Composite](https://umarucreative.github.io/MPDoors-Final-20260828/why-composite/): Why composite outlasts vinyl and wood: the six sided HydroShield seal, ENERGY STAR in all four climate zones and the testing behind every rating.
+- [Real Projects](https://umarucreative.github.io/MPDoors-Final-20260828/real-projects/): Real MP Doors installations from Florida humidity to Minnesota winters. Browse homeowner projects by climate, door style and installation story.
+- [Door Guides](https://umarucreative.github.io/MPDoors-Final-20260828/blog/): Six practical MP Doors guides: measuring a rough opening, U-Factor and SHGC, freeze thaw, HVHZ approval, factory finish care and decorative glass.
+- [Warranty and Support](https://umarucreative.github.io/MPDoors-Final-20260828/warranty-support/): MP Doors warranty terms, measurement and installation guides, care tips and FAQs. Questions or a claim? Call 1-888-366-7717 for direct support.
+
+## Optional
+
+- Support: 1-888-366-7717

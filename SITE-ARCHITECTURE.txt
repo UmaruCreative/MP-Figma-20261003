@@ -1,0 +1,964 @@
+================================================================================
+MP DOORS — FULL WEBSITE
+Site architecture, file map and build notes
+Compiled 27 August 2026
+================================================================================
+
+Master homepage : index-glass.html from "mpdoors-golden-yellow" (golden-yellow
+                  colourway, Cormorant Garamond, glass category panels)
+Interior pages  : site-v4 (formerly Distinction Doors), rebranded to MP Doors
+                  and retoned to the golden-yellow master palette
+Retailer        : The Home Depot (replaces Lowe's throughout)
+Total pages     : 27 HTML pages, all internal links verified
+Metadata        : site-v4-metadata-2026-08-27 v3.0 applied to all 27,
+                  plus robots.txt, sitemap.xml and llms.txt
+
+Local preview (the site is static, but the pages must be served over HTTP for
+relative asset paths to resolve exactly as they will in production):
+
+    cd "MP-Doors-Website" && python3 -m http.server 8777
+    then open http://127.0.0.1:8777/
+
+
+================================================================================
+1 · SITE HIERARCHY
+================================================================================
+
+Home  (/)                                                          index.html
+│
+├── COLLECTION
+│   │
+│   ├── Entry Doors  (/entry-doors/)                          entry-doors.html
+│   │   ├── 1/2 Lite                                     entry-half-lite.html
+│   │   ├── 3 Lite                                          entry-3-lite.html
+│   │   ├── 3/4 Lite                                      entry-3-4-lite.html
+│   │   ├── 4 Lite                                          entry-4-lite.html
+│   │   ├── Full Lite                                    entry-full-lite.html
+│   │   ├── Narrow Lite                                entry-narrow-lite.html
+│   │   ├── Contemporary Teak                   entry-contemporary-teak.html
+│   │   ├── Craftsman                                    entry-craftsman.html
+│   │   ├── Modern Full Lite                     entry-modern-full-lite.html
+│   │   └── 3/4 Oval Lite                            entry-3-4-oval-lite.html
+│   │
+│   └── Patio Doors  (/patio-doors/)                          patio-doors.html
+│       │
+│       ├── Gliding  (2)                                    patio-gliding.html
+│       │   ├── 2-Panel Gliding                    patio-2-panel-gliding.html
+│       │   └── 3/4 Lite Gliding                       gliding-3-4-lite.html
+│       │
+│       └── Hinged  (3)                                      patio-hinged.html
+│           ├── Full Lite Hinged                 patio-full-lite-hinged.html
+│           ├── 3/4 Lite Hinged                   patio-3-4-lite-hinged.html
+│           └── HVHZ Impact Hinged        patio-impact-full-lite-hinged.html
+│
+├── Why MP Doors  (/why-composite/)                        why-composite.html
+│   ├── Material Comparison          /why-composite/            #comparison
+│   ├── HydroShield™ Protection      /why-composite/#hydroshield
+│   └── Testing & Certifications     /why-composite/#certifications
+│
+├── Real Projects  (/real-projects/)                        real-projects.html
+│   ├── Browse by Climate            /real-projects/#climate
+│   ├── Browse by Style              /real-projects/#style
+│   └── Installation Stories         /real-projects/#stories
+│
+└── Support & Guides  (/warranty-support/)               warranty-support.html
+    ├── Blog                         /blog/                      blog.html
+    ├── Measurement & Installation   /warranty-support/#installation
+    ├── Care, Warranty & FAQ         /warranty-support/
+    └── Contact Us                   /warranty-support/#contact
+
+
+URL NOTE
+--------
+The hierarchy above uses the production directory form (/why-composite/).
+On disk the pages are flat files (why-composite.html) so the site opens and
+browses correctly from the filesystem and from any static host. At deploy
+time map each clean URL to its file, e.g.
+
+    /why-composite/     ->  why-composite.html
+    /real-projects/     ->  real-projects.html
+    /blog/              ->  blog.html
+    /warranty-support/  ->  warranty-support.html
+    /entry-doors/       ->  entry-doors.html
+    /patio-doors/       ->  patio-doors.html
+
+Anchors are unchanged by the mapping. The <link rel="canonical"> on every page
+already points at the clean URL form under https://www.mpdoors.com/.
+
+
+================================================================================
+2 · WHERE THE HIERARCHY APPEARS
+================================================================================
+
+Every level of the tree above is reachable from every page, through four
+surfaces, all of which carry the identical link set:
+
+  a. Homepage mega menu        index.html, opened by the MENU button.
+                               Four columns: Entry Doors · Patio Doors ·
+                               Why MP Doors + Real Projects · Support & Guides.
+  b. Homepage top nav          Collection · Why MP Doors · Real Projects ·
+                               Support · Where to buy.
+  c. Interior header           Collection ▾ and Why MP Doors ▾ to the left of
+                               the wordmark; Real Projects ▾ and Support &
+                               Guides ▾ to the right, plus Where to buy.
+  d. Mobile menu               Full nested tree under the burger, below 1040px.
+
+Every page footer additionally carries Collection, Why MP Doors and
+Support & Guides columns, plus the MP Doors support number.
+
+
+================================================================================
+3 · BLOG CONTENTS  (/blog/)
+================================================================================
+
+The blog index and all six articles are on one page, each article addressable
+by anchor:
+
+  /blog/#measure       How to measure a rough opening for a replacement door
+  /blog/#u-factor      U-Factor and SHGC, in plain terms
+  /blog/#freeze-thaw   Why freeze–thaw is a water problem, not a cold problem
+  /blog/#hvhz          What HVHZ approval actually certifies
+  /blog/#finish        Caring for a factory finish that never needs refinishing
+  /blog/#glass         Choosing decorative glass: light in, privacy kept
+
+To split these into individual article pages later, lift each <section> into
+its own file and point the index card links at it; nothing else changes.
+
+
+================================================================================
+4 · FILE MAP
+================================================================================
+
+MP-Doors-Website/
+├── index.html                    Master homepage (from index-glass.html)
+├── entry-doors.html              Entry landing, 10 styles
+├── entry-*.html                  10 entry product pages
+├── patio-doors.html              Patio landing
+├── patio-gliding.html            Gliding sub-category landing
+├── patio-hinged.html             Hinged sub-category landing
+├── patio-2-panel-gliding.html    Product
+├── gliding-3-4-lite.html         Product
+├── patio-full-lite-hinged.html   Product
+├── patio-3-4-lite-hinged.html    Product
+├── patio-impact-full-lite-hinged.html  Product (HVHZ impact)
+├── why-composite.html            NEW — Why MP Doors
+├── real-projects.html            NEW — Real Projects, filterable gallery
+├── blog.html                     NEW — Blog index + six articles
+├── warranty-support.html         NEW — Support & Guides
+├── 404.html                      NEW — Not found (added for the v2.0 meta spec)
+├── SITE-ARCHITECTURE.txt         This file
+├── robots.txt                    Crawl directives, per spec file 04
+├── sitemap.xml                   24 indexable URLs
+├── llms.txt                      AI crawler convenience index
+└── assets/
+    ├── brand/                    mp-doors.png (wordmark), mp-doors-mark.png
+    ├── social/                   27 Open Graph cards, 1200 x 630
+    ├── css/
+    │   ├── styles.css            Homepage system (golden-yellow master)
+    │   ├── glass.css             Homepage category glass panels
+    │   ├── home.css              Interior system, retoned to golden-yellow
+    │   └── product.css           Product-page components
+    ├── js-home.js                Homepage behaviour (mega menu, rail, form)
+    ├── images/
+    │   ├── A_Gliding-sunset-16-9.png     RETAINED golden-yellow scene render
+    │   ├── A_Welcome-home-scene-16-9.png RETAINED golden-yellow scene render
+    │   └── themes/golden-yellow/         RETAINED golden-yellow door renders
+    │       ├── Craftsman-Medium-Oak-Golden-yellow.png
+    │       ├── entry-modern-narrow-lite.png
+    │       └── patio-gliding.png
+    ├── product/
+    │   ├── entry/                47 entry-door photographs (MP library)
+    │   ├── gliding/              3/4 Lite Gliding (shaker panel)
+    │   ├── gliding-2panel/       2-Panel Full Lite Gliding
+    │   ├── full-lite-hinged/     Full Lite Hinged (French)
+    │   ├── 3-4-lite-hinged/      3/4 Lite Hinged
+    │   ├── impact-hinged/        HVHZ impact series
+    │   └── diagram/              Line drawings (entry, gliding, full lite,
+    │                             3/4 lite) from the MP Drawings folder
+    └── scene/                    Cinematic and lifestyle photography (MP library)
+
+Total on disk: ~38 MB, 27 HTML pages, no external dependencies other than the
+Google Fonts stylesheet for Cormorant Garamond.
+
+
+================================================================================
+5 · CONTENT CHANGES APPLIED
+================================================================================
+
+BRANDING
+  "Distinction" / "Distinction Doors"     ->  "MP Doors"     (all copy, titles,
+                                              meta, alt text, schema.org, aria
+                                              labels, breadcrumbs, footers)
+  distinctiondoors-usa.com                ->  mpdoors.com    (canonical URLs)
+  assets/brand/distinction.png            ->  assets/brand/mp-doors.png
+  Logo                                    ->  MPDoors_Logo.png
+
+RETAILER
+  "Lowe's" / "Lowes"                      ->  "The Home Depot"
+  lowes.com                               ->  homedepot.com
+  utm_source=distinction                  ->  utm_source=mpdoors
+  All "Where to buy" CTAs now point at www.homedepot.com with per-page
+  utm_campaign values, ready to be repointed at the MP Doors brand landing
+  page on homedepot.com.
+
+ONE DELIBERATE EXCEPTION — please review
+  "Distinction" also survives as the name of an MP Doors decorative glass
+  pattern on two pages:
+      entry-3-4-oval-lite.html         glass option, spec row, meta, one image
+      entry-prestige-oval-lite.html    glass option, spec row, meta, one image
+  It was kept because it is MP Doors' own pattern name — it appears that way
+  in the MP image library filenames (e.g. "3Qtr Oval Lite 3068 Distinction
+  Right Hand Medium Oak"), not as the competing brand. If you would rather it
+  went, say the word and it can be renamed everywhere in one pass.
+
+PRODUCT DATA CORRECTION
+  entry-prestige-oval-lite.html: the "Andaman Brass" glass option was removed
+  (chip, gallery tile, spec row and meta description). No MP Doors render
+  exists for it in the image library; the remaining four patterns — Andaman,
+  Flores, Distinction, Zen — all have photography.
+
+
+================================================================================
+6 · IMAGE POLICY
+================================================================================
+
+RETAINED (untouched, as instructed)
+  Everything sourced from Golden-yellow-theme, i.e. the three themed door
+  renders and the two "A_" scene renders. They carry the homepage hero, the
+  two category plates, the four narrative chapters, three of the four
+  signature-rail cards, and the mega-menu feature image.
+
+REPLACED
+  Every Distinction Doors product photograph was replaced with the equivalent
+  MP Doors asset from the Images library, resized to a 1400–2000 px long edge
+  and re-encoded as JPEG at quality 78–80. Scene and lifestyle photography was
+  likewise replaced with MP Doors photography.
+
+  Representative mapping (source folder -> site path):
+    Entry Doors/Half Lite Doors/…/Right          -> product/entry/half-lite.jpg
+    Images/Entry Doors/Modern 3 Lite/…           -> product/entry/3-lite.jpg
+    Entry Doors/3 Qtr Lite Doors/…/Right Hand    -> product/entry/3-4-lite.jpg
+    Entry Doors/4 Lite Doors/…/Right Hand        -> product/entry/4-lite.jpg
+    Entry Doors/Full Lite Doors/…/Right Hand     -> product/entry/full-lite.jpg
+    Entry Doors/Fan Lite Doors/…/Right Hand      -> product/entry/fan-lite.jpg
+    Entry Doors/Narrow Lite Doors/…/Right Hand   -> product/entry/narrow-lite.jpg
+    Entry Doors/Craftsman Doors/…Vintage…        -> product/entry/craftsman.jpg
+    Entry Doors/New Entry Door Images_Taiwan/A4P -> product/entry/modern-full-lite.jpg
+    Entry Doors/Prestige Oval Lite Doors/…       -> product/entry/prestige-oval-lite.jpg
+    Entry Doors/3 Qtr Oval Lite Doors/…          -> product/entry/3-4-oval-lite.jpg
+    Entry Doors/Contemporary Teak Doors/…        -> product/entry/teak.jpg
+    Images/Gliding Doors/2_3 Shaker Panel…       -> product/gliding/*
+    Gliding Doors/2 Panel Gliding/…              -> product/gliding-2panel/*
+    Hinged Doors/Full Lite/Full Lite Inswing/…   -> product/full-lite-hinged/*
+    Hinged Doors/3 Qtr Lite/3Qtr Lite Inswing/…  -> product/3-4-lite-hinged/*
+    Hinged Doors/Full Lite/Full Lite Outswing/…  -> product/impact-hinged/studio.jpg,
+                                                    product/impact-hinged/panel.jpg
+    Impact HVHZ Gliding/…                        -> product/impact-hinged/scene.jpg,
+                                                    product/impact-hinged/pos-sheet.jpg
+    Drawings/…                                   -> product/diagram/*
+    Ideas for lifestyle/… and Patio Stock…       -> scene/*
+
+  36 image references that were broken in the source site (placeholders that
+  had never been shot) are now filled with real MP Doors photography. Every
+  src and href on every page resolves — verified.
+
+  The HVHZ impact door is shown with the full-lite hinged OUTSWING render,
+  which is the correct door body for that line. The MP "Impact HVHZ Gliding"
+  folder is gliding product; its point-of-sale sheet is kept as
+  product/impact-hinged/pos-sheet.jpg and is not used as a product photo.
+  A dedicated impact-hinged studio shot would be the one asset worth
+  commissioning.
+
+
+================================================================================
+7 · DESIGN SYSTEM
+================================================================================
+
+The interior pages were retoned so the whole site reads as one brand:
+
+  Palette   Interior tokens now mirror the master homepage :root —
+            paper #FDF6E6, ink #1C1608, muted #6E5A2C, gold #D2A63A on dark
+            and #8A6100 on paper, with the dark bands warmed to #241B09.
+            All text/background pairs clear WCAG AA at 6:1 or better.
+  Type      Cormorant Garamond throughout, replacing EB Garamond, with the
+            type scale lifted to suit its smaller x-height.
+  Scrims    Hero and cinematic scrims warmed to the palette and strengthened
+            so headlines hold over daylight photography at every viewport.
+  New       Comparison table, filter chips, editorial list, long-form article
+            and form primitives were added to home.css for the four new pages.
+
+Behaviour is unchanged from the source: no build step, no framework, no CDN
+scripts, reduced-motion respected, and the "Reduce animations" toggle works on
+every page.
+
+
+================================================================================
+8 · OPEN ITEMS FOR THE CLIENT
+================================================================================
+
+  1. Where-to-buy links point at www.homedepot.com with utm parameters.
+     Repoint them at the MP Doors brand or product landing pages when the
+     Home Depot URLs are known. Search for "homedepot.com" to find them all.
+  2. The contact form on warranty-support.html validates in the browser but
+     has no endpoint. Wire the submit handler in the page's inline script.
+  3. The homepage "Send the guide" form behaves the same way.
+  4. Real Projects is a working, filterable gallery of MP Doors installations.
+     Named case studies and any customer quotes should be added only once
+     supplied and verified — the page invites submissions rather than
+     presenting invented ones.
+  5. Decide on the "Distinction" glass-pattern name (section 5).
+  6. Specification figures marked "pending" in the source pages are carried
+     through unchanged and still need confirmation.
+
+================================================================================
+
+==
+
+==============================================================================
+9 . METADATA, v3.0  (site-v4-metadata-2026-08-27, applied)
+==============================================================================
+
+Supersedes meta-descriptions-all-pages.md v2.0, which this file previously
+recorded. Seven datasets were integrated across all 27 pages.
+
+  02 titles              27 title elements, all unique, all 60 chars or under
+  03 meta descriptions   27, all inside the 140 to 158 band, no dashes
+  04 robots              per page meta robots, plus robots.txt
+  05 canonical           27 self referencing canonicals on www.mpdoors.com
+  06 Open Graph          full OG and Twitter Card, 1200x630 cards generated
+  07 Schema.org JSON-LD  one @graph per page, site wide nodes merged in
+  08 Dublin Core         11 DC elements plus the two namespace links per page
+
+The spec covers 26 pages. This build has 27: 404.html was created here after
+the v2.0 pass and is absent from the v3.0 inventory. It was given the same
+treatment, at noindex, follow, and excluded from the sitemap.
+
+
+URL MAP CHANGED
+------------------------------------------------------------------------------
+v2.0 canonicalised products under /doors/. v3.0 drops that segment and nests
+patio products under their sub category. The canonicals now deployed are:
+
+  index.html                           https://www.mpdoors.com/
+  entry-doors.html                     https://www.mpdoors.com/entry-doors/
+  entry-craftsman.html                 https://www.mpdoors.com/entry-doors/craftsman/
+  patio-doors.html                     https://www.mpdoors.com/patio-doors/
+  patio-gliding.html                   https://www.mpdoors.com/patio-doors/gliding/
+  patio-2-panel-gliding.html           https://www.mpdoors.com/patio-doors/gliding/2-panel/
+  patio-hinged.html                    https://www.mpdoors.com/patio-doors/hinged/
+  patio-impact-full-lite-hinged.html   https://www.mpdoors.com/patio-doors/hinged/impact-full-lite/
+  why-composite.html                   https://www.mpdoors.com/why-composite/
+  blog.html                            https://www.mpdoors.com/blog/
+  ... and the same pattern for every remaining page.
+
+LAUNCH WARNING, carried from spec file 05. These canonicals point at
+www.mpdoors.com, which today serves the old WordPress site. Deploy them with
+the cutover, not before, or set X-Robots-Tag noindex on the staging host.
+
+
+CONTENT MATCH PASS
+------------------------------------------------------------------------------
+The spec README states the datasets were never checked against the real page
+bodies, and instructs one pass be run before publishing. That pass was run.
+Ten descriptions and seven structured data blocks carried claims the pages do
+not make. Each was corrected to what the page states.
+
+DESCRIPTIONS CORRECTED
+
+  entry-craftsman.html
+     page lists three glass options and never mentions an SDL variant
+
+  entry-half-lite.html
+     32 in. width is not on the page; the spec table states 36 in. (3068), others TBC
+
+  gliding-3-4-lite.html
+     page states two sizes, 60x80 and 72x80, not 72x80 alone
+
+  patio-2-panel-gliding.html
+     page states DP50 only, and lists the screen as not included
+
+  patio-3-4-lite-hinged.html
+     page lists three glass styles, Clear, SDL and GBG, not five
+
+  patio-full-lite-hinged.html
+     page does not state ENERGY STAR anywhere; it does state PG55 outswing
+
+  patio-gliding.html
+     both gliding pages state DP50; neither states DP45
+
+  patio-hinged.html
+     no center post is not stated on the page, and reads as a negative construction
+
+  patio-impact-full-lite-hinged.html
+     page states Impact Low-E glass with no thickness or layer count
+
+  why-composite.html
+     CFC free polyurethane core is not stated on this page
+
+STRUCTURED DATA CORRECTED
+
+  All 12 entry product pages
+     Dropped Certification FL-28093.1 and NFRC 20204, and the properties
+     Structural rating DP40 and Core CFC free polyurethane. Every entry page
+     spec table reads 'To be confirmed' for structural rating and core, and
+     none states an FL approval or an NFRC label. ENERGY STAR was kept: every
+     entry page does state it. This also matches the v2.0 audit finding that
+     the entry pages carry the instruction 'Entry doors are NOT hurricane or
+     impact rated, do not add FL or TDI certifications'.
+
+  entry-half-lite.html
+     Available sizes 32 and 36 in. corrected to 36 in. x 80 in.
+
+  patio-2-panel-gliding.html
+     Dropped Certification FL-10181.4 / 10181.3, not on the page. NFRC label
+     20616 corrected to 20617, which is what the page prints. Structural
+     rating DP45 and DP50 corrected to DP50. Sizes and glass set to the two
+     sizes and four styles the page lists.
+
+  gliding-3-4-lite.html
+     NFRC 20616 corrected to 20617. Structural rating corrected to DP50.
+     Sizes corrected to both widths, glass to the three styles listed.
+
+  patio-full-lite-hinged.html
+     Dropped the ENERGY STAR certification, which this page never claims.
+     Finishes corrected to White and Black.
+
+  patio-3-4-lite-hinged.html
+     Dropped ENERGY STAR. Structural rating DP40 / DP50 corrected to PG40
+     inswing and PG50 outswing, the ratings the page actually prints.
+     Glass corrected to three styles.
+
+  patio-impact-full-lite-hinged.html
+     Dropped Certification DR-1042, the Texas Department of Insurance
+     evaluation, which appears nowhere on the site. This is spec open item 5
+     and is a page content gap, not a markup gap. Dropped ENERGY STAR and the
+     CFC free polyurethane core. Size corrected to 72 x 80, the only size the
+     page lists. Glass corrected to Impact Low-E.
+
+  Organization node, every page
+     The sameAs array shipped as a literal PLACEHOLDER string. Per the spec's
+     own instruction, it was left out entirely rather than shipped. Fill it
+     when the verified profile URLs are confirmed.
+
+
+IMAGES
+------------------------------------------------------------------------------
+Eight og:image and primaryImageOfPage paths in the spec name files that do
+not exist in this build. Each was mapped to that page's own primary image:
+
+  assets/product/gliding-2panel/studio.jpg  -> gliding-2panel/clear.jpg
+  assets/product/gliding/studio.jpg         -> gliding/clear.jpg
+  assets/product/full-lite-hinged/studio.jpg -> full-lite-hinged/clear.jpg
+  assets/product/3-4-lite-hinged/studio.jpg -> 3-4-lite-hinged/clear.jpg
+  assets/product/diagram/hydroshield.png    -> scene/craftsman-lifestyle.jpg
+  assets/scene/lifestyle-01.jpg             -> scene/gliding-blinds-lifestyle.jpg
+  assets/scene/support-01.jpg               -> scene/hinged-lifestyle.jpg
+  assets/scene/editorial-01.jpg             -> scene/entry-3-4-lifestyle.jpg
+
+The spec requires og:image at 1200 x 630 and notes that dedicated social
+crops are recommended, because a portrait door render letterboxes badly in a
+1.91:1 frame. 27 cards were generated into assets/social/, one per page, each
+fitted whole inside the frame and padded onto the brand paper ground FDF6E6.
+og:image and twitter:image point at these. Schema.org Product image and
+primaryImageOfPage still point at the real product photograph, which is what
+Google's product image guidance wants.
+
+
+ROBOTS, SITEMAP AND llms.txt
+------------------------------------------------------------------------------
+Default on 24 pages:
+  index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1
+
+Held at noindex, follow on the spec's evidence:
+  entry-fan-lite.html            62 of 63 THD items discontinued, and the one
+                                 survivor carries no SKU. CONFIRMED 23 Sep 2026
+                                 against the Channel Status column: 62 of 63
+                                 read OBSOLETE or DISCONTINUED, and the single
+                                 survivor, 2N2868R4GALY24, reads
+                                 SUPERSKU_CERTIFIED with no SKU. See section 15.
+  entry-prestige-oval-lite.html  all 18 THD items flagged discontinued
+  Both stay in the navigation and keep follow, so they remain crawlable and
+  pass equity. One line changes in each when the client confirms status.
+
+Also noindex, follow, added here rather than by the spec:
+  404.html                       a not found page should never be indexed
+
+robots.txt   written at the site root, exactly as specified. AI crawlers are
+             deliberately not blocked; the reasoning is in spec file 04.
+sitemap.xml  24 URLs. The three noindex pages are excluded, since listing a
+             noindex URL in a sitemap is a contradictory signal.
+llms.txt     shipped on the spec's recommendation, explicitly as a
+             convenience rather than as a coverage claim.
+
+
+OPEN ITEMS CARRIED FORWARD
+------------------------------------------------------------------------------
+  1. sameAs is empty. Fill with verified profiles only, in the order the spec
+     gives: Wikidata, brand social, LinkedIn, and the MP Doors brand page on
+     homedepot.com.
+  2. Every Offer carries priceCurrency and seller but no price, marked PENDING
+     by the spec. Product nodes will not qualify for merchant listing rich
+     results until a per SKU price feed exists. They still do entity work.
+  3. The six BlogPosting nodes carry datePublished and dateModified as
+     PENDING. Populate from real publication dates.
+  4. TDI approval DR-1042 is real and unused anywhere on the site. Adding it
+     to the impact page body would let the markup carry it too, and it is a
+     free differentiator in Texas.
+  5. PG versus DP on the gliding line is still unreconciled. The pages and the
+     markup now both say DP50, because that is what the pages print. Home
+     Depot names the product PG50. Reconcile with Rex.
+  6. The homepage description reads 'will not rot, warp or rust'. That is the
+     spec text and a standard retail claim, but it sits against the brief to
+     avoid negative framing in homepage copy. A positive variant inside the
+     same character band can be swapped in on request.
+  7. ProductGroup with hasVariant is the right long term model for ranges that
+     cover many SKUs. It needs a per SKU feed and is recorded, not built.
+
+==============================================================================
+
+==============================================================================
+10 . DEPLOYMENT READINESS  (28 August 2026)
+==============================================================================
+
+AUDITED AND CLEAN
+  Case sensitivity   Every href and src was compared byte for byte against the
+                     filenames on disk. macOS is case insensitive and Linux is
+                     not, so a single wrong capital is a 404 in production.
+                     No mismatches.
+  Path form          No root relative paths. Every asset reference is relative,
+                     so the site works from a subdirectory such as a GitHub
+                     Pages project URL as well as from a domain root.
+  Filenames          No spaces, no non ASCII, no percent encoding needed.
+  Broken references  None, across 27 pages, including in page anchors and
+                     cross page anchors.
+  JSON-LD            All 27 graphs parse, one block per page.
+  Structure          Every page has a doctype, lang, charset, viewport, a skip
+                     link, a main landmark, exactly one h1, and alt text on
+                     every image.
+  Third party        One dependency, the Google Fonts stylesheet for Cormorant
+                     Garamond. Nothing else is fetched from outside the repo.
+
+FIXED FOR DEPLOYMENT
+  404.html had no h1; its main heading was an h2. Promoted to h1 with a
+  .pagetitle rule so it keeps the h2 visual scale.
+  .DS_Store removed.
+
+ADDED
+  .gitignore     macOS, Windows, editor and Python artefacts
+  .nojekyll      GitHub Pages runs Jekyll by default; this site is plain
+                 static HTML and does not want that processing
+  README.md      repository front door, local preview, structure, URL note
+  set-host.py    switches the 675 absolute self references between hosts, and
+                 swaps robots.txt between a production and a blocking staging
+                 version. Round trip verified byte identical.
+
+CARRIED, NOT BLOCKING
+  Orphan assets  12 image files, 4.6 MB, are on disk but referenced by no
+                 page. They are spare variants and the impact point of sale
+                 sheet, kept deliberately. Safe to delete if the repository
+                 size matters:
+                   product/3-4-lite-hinged/lifestyle-2.jpg
+                   product/diagram/entry.jpg
+                   product/entry/entry-prestige-oval-lite-andaman-light.jpg
+                   product/entry/teak-light-oak.jpg
+                   product/gliding-2panel/lifestyle-2.jpg
+                   product/gliding/blinds.jpg
+                   product/gliding/gbg-4lite.jpg
+                   product/impact-hinged/lifestyle.jpg
+                   product/impact-hinged/panel.jpg
+                   product/impact-hinged/pos-sheet.jpg
+                   scene/gliding-interior.jpg
+                   scene/in-store.jpg
+
+THE ONE DECISION LEFT
+  The canonicals declare directory URLs and the files are flat. On a host with
+  rewrites this is correct as it stands. On GitHub Pages, which has no rewrite
+  engine, pages serve at their .html paths and the canonicals would point at
+  URLs that do not resolve. Either use a rewriting host, change the canonicals
+  to the .html form, or restructure each page into its own directory as
+  index.html. See section 1 for the full URL map.
+
+==============================================================================
+
+==============================================================================
+11 . PRODUCT WITHDRAWAL AND FOUNDING YEAR  (28 August 2026)
+==============================================================================
+
+FOUNDING YEAR
+  Every reference to 1999 was changed to 2004, 57 in all, across 27 pages plus
+  llms.txt and this file. The claims that were derived from the old year moved
+  with it, because 2004 to 2026 is twenty two years, not twenty five:
+    "A quarter century of building fiberglass ..."   -> "Two decades of ..."
+    "One frame, refined for a quarter century"       -> "... for two decades"
+    "refined across more than twenty five years"     -> "... twenty years"
+    "built in the United States for over 25 years"   -> "... over 20 years"
+  No title or meta description carried the year, so no metadata character
+  counts changed.
+
+PRODUCTS WITHDRAWN
+  Fan Lite Entry Door and Prestige Oval Lite Entry Door are removed from the
+  site entirely. Both were already held at noindex on the evidence in metadata
+  spec file 04, which recorded 62 of 63 Fan Lite items and all 18 Prestige Oval
+  Lite items as discontinued in the THD item table. This completes that.
+
+  WITHDRAWN 19 September 2026, then briefly and wrongly re-described as a
+  pending relaunch. RETRACTED 23 September 2026. Both original figures hold:
+  all 18 Prestige Oval rows are retired, and 62 of the 63 Fan Lite rows read
+  OBSOLETE or DISCONTINUED in the Channel Status column. The single survivor,
+  2N2868R4GALY24, reads SUPERSKU_CERTIFIED with no SKU assigned and no
+  workflow state, which is a leftover record rather than a live product until
+  MP confirms otherwise. The 2N prefixed rows are obsolete, not staged. The
+  earlier reading came from the DotCom Discontinued Flag alone, which is blank
+  on those rows, without reading Channel Status. See section 15.
+
+  Pages deleted        entry-fan-lite.html
+                       entry-prestige-oval-lite.html
+  Assets deleted       12 files, 2.2 MB: both product images, their glass
+                       variants, and both Open Graph cards
+  References removed   99 navigation and mobile menu links across 25 pages,
+                       and the two cards in the Entry Doors category grid
+  Counts corrected     Entry styles 12 -> 10, in the entry-doors title, meta
+                       description, Open Graph, Twitter, Dublin Core, JSON-LD,
+                       page copy and category count, plus the homepage
+                       subtitle and button, the 404 page, README and this file
+
+  Sitemap needed no change: both pages were already excluded because they
+  carried noindex.
+
+  Two homepage links pointed at the retired Prestige Oval Lite and were
+  repointed to 3/4 Oval Lite, the surviving oval decorative door: the Entry
+  plate's "Decorative Oval" button, and the first signature rail card, which
+  was relabelled to match. The golden yellow render is retained and its alt
+  text no longer names a product that is not sold.
+
+  Also corrected while in the file: the alt text on the four narrative chapter
+  images was one image out of step with the images themselves, from an earlier
+  pass. All ten themed images now carry alt text describing the image shown.
+
+==============================================================================
+
+==============================================================================
+12 . GOLDEN YELLOW RENDER SWAP  (28 August 2026)
+==============================================================================
+
+entry-prestige-oval.png is retired and deleted. It depicted the Prestige Oval
+Lite, withdrawn in section 11, so the site was still showing a door that is no
+longer sold. All three uses now carry the client supplied Craftsman render,
+Craftsman-Medium-Oak-Golden-yellow.png, at the same 1122 x 1402 as the rest of
+the set:
+
+  1  Collection mega menu, feature image
+  2  The Signature Doors, first card
+  3  The Four Zones, Chapter II, North Central
+
+The signature card moved with its image. It read "3/4 Oval Lite" and linked to
+entry-3-4-oval-lite.html, a stand in put in place when the oval door was
+withdrawn. Left alone it would have captioned a Craftsman photograph with an
+oval door, so the card is now Craftsman, linking to entry-craftsman.html, with
+Vintage decorative glass and a Medium Oak finish. Both are on that page's own
+spec table.
+
+The fourth signature card, Impact Florida, was the only one in the rail still
+carrying a 16:9 photograph, assets/scene/coastal-16-9.jpg, among three portrait
+golden yellow renders. It now uses patio-gliding.png, the same render as Full
+Lite Gliding, so the rail reads as one set. coastal-16-9.jpg is retained: it is
+still in use on real-projects.html and why-composite.html.
+
+  Theme set is now three renders, all 1122 x 1402:
+    Craftsman-Medium-Oak-Golden-yellow.png   entry, Medium Oak, Vintage glass
+    entry-modern-narrow-lite.png             entry, Smooth White, Water Wave
+    patio-gliding.png                        patio, Smooth White
+
+  The Craftsman file keeps the name it was supplied under. It is the only
+  Title Case name in the folder; references match it exactly, which is what
+  matters on a case sensitive host.
+
+==============================================================================
+
+==============================================================================
+13 . SKU LIST RECONCILIATION  (19 September 2026)
+==============================================================================
+
+Source: SKU_List_with_Panel_Code.xlsx, Rex Lin, 14 September 2026, 693 rows.
+Column 38, "Production Training Panel Code / Type", is Rex's addition and maps
+every THD SKU to a production panel code.
+
+READ THE THREE STATUS COLUMNS TOGETHER
+"Discontinued" is not one flag. DotCom Discontinued Flag, THD SKU # and THD
+OnlineStatus have to be read together, or the count comes out wrong:
+
+    525  live                  not discontinued, has a SKU, online true
+     81  pipeline, no SKU      in the vendor system, no THD SKU yet
+     33  pipeline, not online  SKU exists, online false
+     54  discontinued but online true
+
+THIS PASS REVERSES PART OF SECTION 9
+Section 9 resolved ten description conflicts by trusting the page body over
+the dataset. Two of those calls were wrong, and the dataset was right:
+
+  entry-half-lite.html   Section 9 removed the 32 in. width from the
+                         description because the page did not offer it. The
+                         SKU list shows 32 x 80 live in all three glass
+                         types. The width is now on the page.
+  entry-craftsman.html   Section 9 removed the SDL mention because the page
+                         listed three glass options and no SDL variant. The
+                         SKU list shows 58 live Craftsman SKUs across five
+                         glass options and three lite layouts, SDL included.
+                         Both are now on the page.
+
+The lesson for the next pass: when a description and a page body disagree, the
+SKU list decides, not the page.
+
+CHANGES APPLIED
+
+  entry-full-lite.html
+     REMOVED the With Blinds glass option. No blinds SKU exists in the
+     decorative Full Lite families, 2868-15P and 3068-1R(14)P, in any status.
+     The chip, the gallery card, the spec row, the body sentence and the
+     structured data value are gone, and the description no longer ends
+     "Tilt, raise, lower", which described the blind.
+     ADDED the 32 x 80 (2868) width. The structured data already carried both
+     widths; only the visible page was stale.
+
+  entry-modern-full-lite.html
+     ADDED With Blinds and Low-E glass, and the Black finish. The four
+     Full Lite blinds SKUs in the sheet are A4P, which is this door, not the
+     decorative Full Lite. The blinds option moved here from there.
+     Clear is not discontinued but is currently online false, so the default
+     chip moved to Frost. Clear stays listed. Recheck at the next data drop.
+
+  entry-4-lite.html
+     ADDED the Smooth Latte finish, live on two SKUs. It is offered with
+     Frosted glass only, and the spec table says so rather than implying a
+     full matrix. New swatch class .dot-latte in product.css.
+
+  entry-3-4-oval-lite.html
+     ADDED Andaman with Brass as a fifth glass option, live in both oak
+     finishes. Section 11 recorded the Brass option as removed; that removal
+     was on entry-prestige-oval-lite.html, a different and now withdrawn
+     door. It was never removed here, and it is live here.
+
+  entry-half-lite.html
+     ADDED the 32 x 80 (2868) width, live in Savana, Scotia and blinds
+     between glass. The description no longer says "in a 36 in. width".
+
+  entry-craftsman.html
+     ADDED Low-E and Spring glass, and a Lite layout control carrying
+     1 Lite, 3 Lite and 6-Lite SDL, mirroring the Grid control on
+     entry-modern-full-lite.html. The page previously implied about twelve
+     combinations; the sheet holds 58 live SKUs. An Option availability row
+     states that Spring and the 6-Lite SDL layout are Medium Oak only, and
+     that the 3 Lite layout carries Frost, Low-E and WaterWave.
+
+  all ten entry pages
+     ADDED three rows to the Construction block, from the THD bullet copy:
+        Panel thickness    1-3/4 in.
+        Frame depth        4-9/16 in. net
+        Actual unit size   37-3/8 x 81-9/16 in for 3068
+                           33-3/8 x 81-9/16 in for 2868 where offered
+     None of these figures appeared anywhere on the site before. They are the
+     highest value addition in this pass: the stated reason for the redesign
+     is returns caused by unclear information, and a door that measures
+     37-3/8 in. when the page says 36 in. is exactly that failure. The patio
+     pages already carried jamb depth 5.75 in., which the sheet confirms as
+     5-3/4 in. net.
+     "Core: To be confirmed" is left alone. Core material is a different
+     fact and the sheet does not give it.
+     The patio figures were NOT touched. The sheet gives three different
+     actual dimensions for 72 x 80 and two different frame depths for the
+     60 and 72 in. patio doors. That conflict is Rex's to settle.
+
+NOT CHANGED, AND WHY
+Seven items need Rex before anything moves. They are written up in
+MP-REX-CONFIRMATION-LIST-20260919.txt, one directory up. The headline three:
+
+  3/4 Lite Hinged says 17 configurations; the sheet gives 20. The page ties
+  the number to a certification claim, "Visible Transmittance 0.41 applies to
+  all 17 configurations". If 17 is the rated scope and 20 the catalogue count,
+  both are right and the page conflates them. Changing it would silently
+  extend a certification over three configurations.
+
+  Gliding cannot be fixed from this sheet at all. 109 live SKUs make 62
+  configurations, 33 of them with a Woodgrain interior that appears nowhere
+  on the site, which states White for all configurations. But Rex labelled
+  all 110 gliding rows with one value, while the site splits gliding into
+  14-GP and 27-GP. The configurations cannot be allocated between the pages.
+
+  Eight live families have no page at all, B4 at 48 live SKUs being the
+  largest. Two of them, the bypass and 4-panel gliding families, introduce a
+  96 in. height and widths to 144 in., which no page on the site allows for.
+
+VERIFIED CORRECT, recorded so it is not re-checked
+  Prestige Oval withdrawal, and for the reason given.
+  Full Lite Hinged, 59 configurations: 96 live SKUs, exactly 59 once handing
+  is collapsed. Finishes White and Black confirmed.
+  HVHZ Impact Hinged, 2 configurations, outswing only.
+  3/4 Lite entry, Narrow Lite, 3 Lite and Contemporary Teak option lists all
+  match their live SKUs exactly.
+  sitemap.xml, 24 URLs, neither withdrawn page present.
+
+==============================================================================
+
+==============================================================================
+14 . SKU RECONCILIATION, SECOND PASS  (23 September 2026)
+==============================================================================
+
+Covers the patio pages, which section 13 left alone, and the six v2 pages,
+which did not exist when section 13 was written.
+
+THE v2 PAGES INHERITED THE SECTION 13 CORRECTIONS
+entry-half-lite-v2.html and entry-craftsman-v2.html were built from the
+corrected v1 pages. Their specification tables are identical to the v1 ones,
+option for option. Nothing had to be re-applied. Two gaps were found and
+closed, both introduced by the v2 rewrite rather than inherited:
+   the Craftsman option-availability sentence was lost when the pending
+   callout was reworded for v2, so the page implied Spring and the 6-Lite SDL
+   layout were available in all four finishes. Restored.
+   the two stand-in glass images were captioned as though they were real
+   photographs, "Low-E clear glass." and "Spring decorative glass.", when
+   both files are copies of the Vintage and Frost photographs. Both captions
+   now say stand-in image, photography pending.
+
+TWO BLOCKED ITEMS WERE RESOLVED FROM THE DATA AFTER ALL
+
+  GLIDING WOODGRAIN, resolved.
+  Section 13 recorded that the gliding rows could not be split between the
+  two gliding products, because Rex labelled all 110 with one value. Two
+  things settled it without him:
+     the model number carries the finish. 3N appears in 51 of the 53 live
+     woodgrain SKUs and in only 2 of the 62 white ones. 3N is the woodgrain
+     interior marker.
+     the structured data already knew. patio-2-panel-gliding.html has always
+     carried "Smooth White, Woodgrain interior with Smooth White exterior" in
+     its JSON-LD, while gliding-3-4-lite.html carries "Smooth White" alone.
+  So the woodgrain interior belongs to the 2-Panel line, and the 3/4 Lite
+  Gliding page is genuinely white only. Its "White (all configurations)" is
+  correct and was left alone. This is the same failure mode as the Full Lite
+  widths in section 13: the structured data was right and the visible page
+  was stale.
+
+  3/4 LITE HINGED, 17 to 20, applied with the certification scope separated.
+  The catalogue count now reads 20, which is what the SKU list holds: two
+  sizes by two swings by five glass styles. The Visible Transmittance note no
+  longer claims 0.41 across "all 17 configurations". It now states that 0.41
+  is recorded for the 17 configurations in the source document, and that the
+  rated scope and the catalogue are being reconciled. The two numbers are no
+  longer conflated, which was the actual defect.
+
+CHANGES APPLIED
+
+  patio-3-4-lite-hinged.html, patio-3-4-lite-hinged-v2.html
+     configuration count 17 to 20, in the figure tile and the specification
+     table. The v1 warranty heading "One glass term across all seventeen"
+     becomes "across all twenty". Visible Transmittance note rescoped as
+     above, on both.
+
+  patio-hinged.html, patio-doors.html
+     the 3/4 Lite Hinged card, 17 configurations to 20.
+
+  patio-2-panel-gliding.html, patio-2-panel-gliding-v2.html
+     Woodgrain interior added as a second finish, in the configurator, the
+     specification table and the availability line. New CSS modifier
+     .fin__dot--woodgrain in product.css.
+     The configuration row now reads "24 glazing configurations, in either
+     interior finish", so the 24 is no longer mistaken for a total. The 24 is
+     the ENERGY STAR scope, "20 of 24", and was not changed.
+
+  entry-craftsman-v2.html
+     option-availability constraint restored, two stand-in captions labelled.
+
+NOT CHANGED, DELIBERATELY
+
+  The pet door. Two live SKUs carry a nickel handleset and a pet door, in the
+  MP Doors Composite Gliding w/insert family, described as "Composite Shaker
+  Gliding, 2/3 Lite", 72 x 80. The shaker description matches the 3/4 Lite
+  Gliding page, whose asset folder is annotated "shaker panel". But that page
+  states 20 SKUs in its set and it is not clear whether these four sit inside
+  that 20 or beside it, and the page states White hardware while these carry
+  nickel. Putting a pet door on the wrong gliding page for the sake of four
+  SKUs is a worse error than leaving the question open. It stays with Rex.
+
+  The hinged pages' "Brickmould / screen / pet door, Not included" was checked
+  and is CORRECT. All 11 live brickmould SKUs are MP Reversible (RP), a
+  separate product with no page, and no Excel Full Lite or Neuma 3/4 Lite SKU
+  carries a brickmould or a pet door. Section 13 listed this as a question;
+  it is now answered and closed.
+
+  The five remaining Rex items are unchanged. See
+  MP-REX-CONFIRMATION-LIST-20260919.txt.
+
+NAMING DIVERGENCE, FOR THE v2 ROLLOUT
+  patio-2-panel-gliding-v2.html is titled "Full Lite Gliding Patio Door",
+  while the v1 page and both patio landing pages still say "2-Panel Gliding".
+  That is a v2 design decision, not a data error, so it was left alone, but
+  the landing cards and navigation will need to move with it when v2 ships.
+
+==============================================================================
+
+==============================================================================
+15 . CHANNEL STATUS CORRECTION  (23 September 2026)
+==============================================================================
+
+Sections 13 and 14 were written without reading the Channel Status column,
+which is the authoritative lifecycle field in the SKU list. Three conclusions
+in those sections were wrong. This section corrects them and is the one to
+trust where they disagree.
+
+THE DEFINITION NOW USED
+  certified   Channel Status contains CERTIFIED on any channel      528
+  pending     Channel Status contains PENDING and not CERTIFIED      74
+  retired     everything else, OBSOLETE or DISCONTINUED              91
+                                                                    ---
+                                                                    693
+This matches the basis used in the two confirmation documents of 22 September,
+so the site, the revision log and those documents now all count the same way.
+The earlier basis in sections 13 and 14, which required a Home Depot SKU and
+an online status of true, gave 525. All 525 sit inside the 528.
+
+CORRECTION 1, FAN LITE
+  Section 13 said 36 of 63 discontinued with 27 replacement items staged, and
+  rewrote the withdrawal rationale on that basis. That was wrong. Channel
+  Status shows 62 of the 63 as OBSOLETE or DISCONTINUED. The single survivor,
+  2N2868R4GALY24, reads SUPERSKU_CERTIFIED with no SKU, no workflow state and
+  no online status, which is a leftover record rather than a staged relaunch.
+  The original figure of 62 of 63 was right and has been restored. Whether the
+  single item is live and whether a relaunch is planned are both asked in the
+  questions document.
+
+CORRECTION 2, ENTRY PANEL THICKNESS
+  Section 13 added "Panel thickness 1-3/4 in." to all ten entry pages, taken
+  from the bullet copy. That figure appears on 114 rows and every one of them
+  is a gliding patio door. No entry item states a panel thickness anywhere in
+  the sheet. The row has been removed from all ten entry pages and from both
+  entry v2 pages.
+  The other two dimensions added in section 13 are sound and remain: the
+  actual unit size, which appears on 235 entry rows for 37-3/8 x 81-9/16 and
+  69 for 33-3/8 x 81-9/16, and the 4-9/16 in. net frame depth, on 191 entry
+  rows.
+
+CORRECTION 3, FULL LITE HINGED CONFIGURATIONS
+  Sections 13 and 14 both recorded 59 as verified correct. The method was
+  wrong. 59 is the number of distinct product names once handing is collapsed,
+  and it double counts naming variants, for example "Hinged French Patio Door"
+  against "Hinged Patio Door" for the same unit. Counted once per size,
+  finish, glass and swing the catalogue holds 48.
+  The page now shows 48, and the certification figures that cite 59 keep their
+  own wording and are labelled as the source document's scope. This is the
+  same treatment already applied to the 17 on the 3/4 Lite Hinged page, and
+  the same underlying defect: a certified scope and a catalogue count merged
+  into one figure.
+
+UNCHANGED BY THIS CORRECTION
+  Every option published on the site was re-checked against Channel Status.
+  All of them rest on certified items: Smooth Latte, Andaman with Brass,
+  Spring, Craftsman Low-E, the Modern Full Lite blinds and Black, both 32 x 80
+  widths, the Woodgrain interior, and the 3/4 Lite Hinged set. Nothing on the
+  site advertises an obsolete item.
+  The 3/4 Lite Hinged count of 20 is confirmed on the certified basis.
+  The per line certified counts are: Gliding 109, Full Lite Hinged 96,
+  Craftsman 58, 3/4 Lite Hinged 40, 3/4 Oval Lite 20, 3 Lite 16, Modern Full
+  Lite 14, 1/2 Lite 12, Narrow Lite 12, 4 Lite 10, 3/4 Lite oak 8, Full Lite
+  8, Contemporary Teak 4, HVHZ Impact 2. That is 409 of 528 under a published
+  page, and 119 with no page.
+
+==============================================================================
