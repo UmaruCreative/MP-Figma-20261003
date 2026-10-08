@@ -962,3 +962,44 @@ UNCHANGED BY THIS CORRECTION
   page, and 119 with no page.
 
 ==============================================================================
+
+==============================================================================
+16 . CONTRAST PASS AND META DESCRIPTIONS  (8 October 2026)
+==============================================================================
+
+Source: MP-Doors_網站視覺分析_兩版本比較.txt, the Version 2 contrast list.
+
+ALREADY MET BY THIS BUILD, NO CHANGE
+  Orange buttons      ink on #F2962F, 7.3:1 (the Figma white on #FF911B was 2.25:1)
+  Series hero copy    #4F4F4F on sand, 6.5:1
+  Unselected tabs     #6B6B6B on white, 5.3:1
+  Give us a call      white on #5E5E5E, 6.5:1
+
+FIXED, assets/css/fg.css (cache buster v=10 to v=11)
+  Form field borders  #CFCFCF (1.56:1) to new token --field #8A8A8A (3.4:1):
+                      .field inputs, .fg-select, .news__field, and the header
+                      search pill (#9A9A9A, 2.8:1)
+  Placeholders        #8A8A8A (3.4:1), and browser defaults on the footer and
+                      newsletter fields, to --grey #6B6B6B (5.3:1)
+  Product cards       border --line #E4E4E4 to --line-2 #CFCFCF, the client's
+                      choice: cards are identified by image and title, so 3:1
+                      is not required and a grey frame was not wanted
+  Breadcrumb on sand  #6B6B6B on #F2E2CF was 4.2:1, now #4F4F4F, 6.5:1
+
+ALSO FIXED
+  warranty-support.html  the six support tiles carried one gear icon; each
+                         now has its own (care, ruler, cart, shield, question,
+                         envelope)
+  why-composite.html     the comparison table scrolls sideways on phones and
+                         was not reachable by keyboard; it is now a focusable,
+                         labelled region
+
+Checked with axe-core 4.10 (WCAG 2.0 to 2.2 AA) at 1280 and 375 px: no
+violations on the pages tested.
+
+META DESCRIPTIONS
+  19 of 25 refined, 6 kept. Every copy on each page (meta, og, twitter, DC,
+  JSON-LD) and the matching llms.txt lines were updated together. Final text,
+  previous text and the reason for each change are in
+  ../MP-Doors-Figma-Meta-Descriptions-20261008.txt.
+

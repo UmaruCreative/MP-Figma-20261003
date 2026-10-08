@@ -15,7 +15,8 @@
   --ink-2:  #3D3D3D;
   --grey:   #6B6B6B;   /*  5.3:1 on white, 4.6:1 on mist */
   --line:   #E4E4E4;
-  --line-2: #CFCFCF;
+  --line-2: #CFCFCF;   /* card edges, dividers */
+  --field:  #8A8A8A;   /* form field and search borders, 3.4:1 on white (WCAG 1.4.11) */
   --mist:   #F3F3F3;   /* accordions, panels */
   --mist-2: #F8F8F8;
   --sand:   #F2E2CF;   /* series hero band */
@@ -139,7 +140,7 @@ p { max-width: 68ch; }
 .fg-mega__links a { display: inline-block; padding: 10px 0; font-size: 1.3rem; font-weight: 500; color: var(--grey); }
 .fg-mega__links a:hover { color: var(--orange-ink); }
 
-.fg-search { display: inline-flex; align-items: center; justify-content: space-between; gap: 14px; height: 34px; min-width: 44px; padding: 0 12px 0 16px; border: 1px solid #9A9A9A; border-radius: 999px; color: var(--grey); font-size: .82rem; }
+.fg-search { display: inline-flex; align-items: center; justify-content: space-between; gap: 14px; height: 34px; min-width: 44px; padding: 0 12px 0 16px; border: 1px solid var(--field); border-radius: 999px; color: var(--grey); font-size: .82rem; }
 .fg-search svg { width: 15px; height: 15px; color: var(--orange-ink); }
 .fg-search span { display: none; }
 html:not(.js) .fg-search { display: none; }
@@ -280,10 +281,10 @@ html.is-locked { overflow: hidden; }
 .fg-prail::-webkit-scrollbar { display: none; }
 .fg-prail > li { flex: 0 0 clamp(200px, 22%, 270px); scroll-snap-align: start; }
 
-.fg-card, .card { display: flex; flex-direction: column; height: 100%; padding: 20px 18px 22px; background: var(--white); border: 1px solid var(--line); border-radius: var(--r); transition: box-shadow .25s var(--ease), border-color .25s var(--ease); }
-.fg-card:hover, .card:hover { border-color: var(--line-2); box-shadow: var(--shadow); }
-.fg-card__img { display: block; aspect-ratio: 1; margin-bottom: 16px; background: var(--white); }
-.fg-card__img img { width: 100%; height: 100%; object-fit: contain; padding: 6% 10%; }
+.fg-card, .card { display: flex; flex-direction: column; height: 100%; padding: 20px 18px 22px; background: var(--white); border: 1px solid var(--line-2); border-radius: var(--r); transition: box-shadow .25s var(--ease), border-color .25s var(--ease); }
+.fg-card:hover, .card:hover { border-color: #A8A8A8; box-shadow: var(--shadow); }
+.fg-card__img { position: relative; display: block; aspect-ratio: 1; margin-bottom: 16px; overflow: hidden; background: var(--white); }
+.fg-card__img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 6% 10%; }   /* absolute: a tall image cannot stretch the square frame and, with it, every card in the row */
 .fg-card__t, .card__name { font-size: 1rem; font-weight: 600; line-height: 1.3; }
 .fg-card__d, .card__spec { margin-top: 4px; font-size: .82rem; color: var(--grey); }
 .fg-card__k, .card__cat { font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--orange-ink); margin-top: 10px; }
@@ -445,6 +446,7 @@ html[data-motion="off"] .rev { opacity: 1; transform: none; transition: none; }
 .crumbs a { padding-block: 4px; margin-block: -4px; }
 .crumbs a:hover { color: var(--orange-ink); }
 .crumbs [aria-current] { color: var(--ink); font-weight: 500; }
+.fg-band .crumbs ol { color: #4F4F4F; }   /* grey on sand is 4.2:1; this is 6.5:1 */
 
 /* ---------- product page (screenshot 4) ---------------------------------- */
 .pdp { padding-block: 20px var(--sec); }
@@ -475,7 +477,7 @@ html[data-motion="off"] .rev { opacity: 1; transform: none; transition: none; }
 .opt__label { font-size: .82rem; font-weight: 500; color: var(--ink); letter-spacing: 0; text-transform: none; }
 .opt__value { font-size: .8rem; color: var(--grey); }
 .opt.is-enhanced .opt__value, .opt.is-enhanced .opt__row, .opt.is-enhanced .swatchrow { display: none; }
-.fg-select { width: 100%; height: 38px; padding: 0 34px 0 12px; border: 1px solid var(--line-2); border-radius: 6px; background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%231E1E1E' stroke-width='1.6'/%3E%3C/svg%3E") right 12px center / 11px no-repeat; font-size: .88rem; color: var(--ink); appearance: none; -webkit-appearance: none; cursor: pointer; }
+.fg-select { width: 100%; height: 38px; padding: 0 34px 0 12px; border: 1px solid var(--field); border-radius: 6px; background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%231E1E1E' stroke-width='1.6'/%3E%3C/svg%3E") right 12px center / 11px no-repeat; font-size: .88rem; color: var(--ink); appearance: none; -webkit-appearance: none; cursor: pointer; }
 .fg-select:disabled { background-color: var(--mist-2); color: var(--ink-2); cursor: default; opacity: 1; }
 .opt__row { display: flex; flex-wrap: wrap; gap: 6px; }
 .chip { min-height: 36px; padding: 6px 12px; border: 1px solid var(--line-2); border-radius: var(--r); background: var(--white); font-size: .85rem; }
@@ -638,16 +640,16 @@ html[data-motion="off"] .rev { opacity: 1; transform: none; transition: none; }
 
 .fields { display: grid; gap: 14px; max-width: 34em; }
 .field label { display: block; margin-bottom: 4px; font-size: .82rem; font-weight: 500; color: var(--ink); }
-.field input, .field select, .field textarea { width: 100%; min-height: 38px; padding: 8px 12px; border: 1px solid var(--line-2); border-radius: 6px; background: var(--white); font-size: .92rem; }
+.field input, .field select, .field textarea { width: 100%; min-height: 38px; padding: 8px 12px; border: 1px solid var(--field); border-radius: 6px; background: var(--white); font-size: .92rem; }
 .field textarea { min-height: 110px; resize: vertical; }
-.field input::placeholder, .field textarea::placeholder { color: #8A8A8A; }
+.field input::placeholder, .field textarea::placeholder, .news__field::placeholder, .fg-ftr__form input::placeholder { color: var(--grey); opacity: 1; }   /* 5.3:1; Firefox fades placeholders by default */
 .field .btn { width: 100%; background: var(--ink); color: var(--white); border-radius: 6px; min-height: 40px; }
 .field .btn:hover { background: #000; }
 
 .news { display: grid; gap: 28px; align-items: center; }
 @media (min-width: 860px) { .news { grid-template-columns: 1fr 1fr; } }
 .news__form { display: flex; flex-wrap: wrap; gap: 8px; max-width: 30em; }
-.news__field { flex: 1 1 220px; min-width: 0; height: 40px; padding: 0 12px; border: 1px solid var(--line-2); border-radius: 6px; }
+.news__field { flex: 1 1 220px; min-width: 0; height: 40px; padding: 0 12px; border: 1px solid var(--field); border-radius: 6px; }
 .news__note { font-size: .85rem; color: var(--grey); margin-top: 12px; }
 .hero { min-height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 60px var(--gutter); }
 
@@ -667,3 +669,84 @@ html[data-motion="off"] *, html[data-motion="off"] *::before, html[data-motion="
 .fg-ftr__tel a, .fg-scard__head h3 a, .fg-ftr ul a, li > a:only-child:not([class]) { display: inline-block; padding-block: 3px; }
 h3 > a { display: inline-block; padding-block: 2px; }
 html.is-locked .fg-hdr { transform: none; box-shadow: 0 1px 0 var(--line); }   /* the menu always has its header */
+
+/* ==========================================================================
+   Phones and touch screens (v1.2)
+   ========================================================================== */
+/* anchors land below the sticky header */
+[id] { scroll-margin-top: calc(var(--hdr-h) + 16px); }
+
+/* touch screens: 16px form text, so iOS does not zoom the page on focus */
+@media (pointer: coarse), (max-width: 900px) {
+  .fg-select, .field input, .field select, .field textarea, .news__field, .fg-ftr__form input, .search__input { font-size: 16px; }
+}
+
+/* touch screens: larger tap targets (44px where the layout allows) */
+@media (pointer: coarse) {
+  .fg-search { height: 44px; }
+  .fg-round button, .rail__btn { width: 40px; height: 40px; }
+  .fg-pager button { min-height: 44px; }
+  .btn-sm { min-height: 40px; }
+  .fg-select, .field input, .field select, .news__field { min-height: 44px; }
+  .fg-ftr__form input, .fg-ftr__form .btn-o { height: 44px; min-height: 44px; }
+  .motion-toggle { min-height: 44px; }
+  .fg-link, .more, .link-arrow, .buy__second, .post__more, .fg-ftr__buy, .fg-filter__clear { min-height: 44px; }
+  .fg-ftr ul a { padding-block: 9px; }
+  .fg-ftr li + li { margin-top: 0; }
+  .mnav__sub a { padding: 12px 0; }
+  .fg-check { padding: 10px 0; }
+  .fg-check input { width: 20px; height: 20px; margin-top: 1px; }
+  .fg-check { grid-template-columns: 22px 1fr; }
+  .fg-key { min-height: 36px; }
+  .filter, .chip, .swatch { min-height: 40px; }
+  .search__hint { display: none; }   /* keyboard shortcuts mean nothing on a phone */
+}
+.search__close .search__x { display: none; }
+@media (pointer: coarse) { .search__close .search__esc { display: none; } .search__close .search__x { display: inline; } }
+
+@media (max-width: 640px) {
+  /* small uppercase labels: at least 12px */
+  .fg-card__k, .card__cat, .label, .fg-eyebrow, .buy__cat, .glance__k, .fig__k, .nature__num, .gal__badge,
+  .thumb__cap, .post__kicker, .assure__k, .crate__i, .fg-check small { font-size: .75rem; }
+
+  /* series grid: two doors per row instead of one */
+  .fg-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .fg-grid .fg-card { padding: 12px 12px 14px; }
+  .fg-grid .fg-card__img { margin-bottom: 10px; }
+  .fg-grid .fg-card__t { font-size: .92rem; }
+  .fg-grid .fg-card__d { font-size: .8rem; }
+
+  /* Support tiles: two per row */
+  .fg-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .fg-tilebox { padding: 20px 10px 16px; }
+  .fg-tilebox b { font-size: .98rem; }
+
+  /* series info row and hero band: tighter, so the doors come sooner */
+  .fg-info { gap: 18px; padding-block: 32px; }
+  .fg-band__in { gap: 24px; padding-block: 28px 32px; }
+
+  /* product options: one per row, so long values are not cut off */
+  .fg-opts { grid-template-columns: 1fr; gap: 12px; }
+
+  /* the comparison table says it scrolls */
+  .swipe-hint { display: block; }
+}
+.swipe-hint { display: none; margin-bottom: 10px; font-size: .8rem; color: var(--grey); }
+
+/* product pages: a "Where to buy" bar once the main button has scrolled away */
+.fg-stickybuy { display: none; }
+@media (max-width: 959px) {
+  .fg-stickybuy {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 80;
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px var(--gutter) calc(10px + env(safe-area-inset-bottom, 0px));
+    background: var(--white); border-top: 1px solid var(--line-2); box-shadow: 0 -8px 24px -16px rgba(0,0,0,.35);
+    transform: translateY(110%); visibility: hidden;
+    transition: transform .3s var(--ease), visibility 0s linear .3s;
+  }
+  .fg-stickybuy.is-on { transform: none; visibility: visible; transition: transform .3s var(--ease); }
+  .fg-stickybuy__t { flex: 1; min-width: 0; font-size: .88rem; font-weight: 600; line-height: 1.25; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .fg-stickybuy .btn { flex: none; min-height: 44px; padding: 0 20px; background: var(--ink); color: var(--white); border-radius: 6px; }
+  html.is-locked .fg-stickybuy { display: none; }
+}
+

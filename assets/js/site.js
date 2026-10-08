@@ -313,32 +313,32 @@
 
   /* ---------- search ----------------------------------------------------- */
   var PAGES = [
-    ['Entry Doors', 'entry-doors.html', 'Collection', 'Ten fiberglass styles on a waterproof composite frame', 'assets/product/entry/craftsman.webp', 'entry front door fiberglass all'],
-    ['1/2 Lite', 'entry-half-lite.html', 'Entry door', 'Half-height decorative glass', 'assets/product/entry/half-lite.webp', 'half lite glass'],
-    ['3 Lite', 'entry-3-lite.html', 'Entry door', 'Mid-century, three horizontal lites', 'assets/product/entry/3-lite.webp', 'three mid century modern'],
-    ['3/4 Lite', 'entry-3-4-lite.html', 'Entry door', 'Three-quarter decorative glass', 'assets/product/entry/3-4-lite.webp', 'three quarter decorative glass'],
-    ['4 Lite', 'entry-4-lite.html', 'Entry door', 'Mid-century, four horizontal lites', 'assets/product/entry/4-lite.webp', 'four mid century'],
-    ['Full Lite', 'entry-full-lite.html', 'Entry door', 'Large decorative glass', 'assets/product/entry/full-lite.webp', 'full glass decorative'],
-    ['Narrow Lite', 'entry-narrow-lite.html', 'Entry door', 'Slim vertical glass', 'assets/product/entry/narrow-lite.webp', 'narrow vertical modern'],
-    ['Contemporary Teak', 'entry-contemporary-teak.html', 'Entry door', 'Solid, architectural, teak-toned', 'assets/product/entry/teak.webp', 'teak solid wood look oak'],
-    ['Craftsman', 'entry-craftsman.html', 'Entry door', 'Straight-edge panels and a glazing bead', 'assets/product/entry/craftsman.webp', 'craftsman oak vintage'],
+    ['Entry Doors', 'entry-doors.html', 'Collection', 'Ten fiberglass styles on a waterproof composite frame', 'assets/product/entry/craftsman-640w.webp', 'entry front door fiberglass all'],
+    ['1/2 Lite', 'entry-half-lite.html', 'Entry door', 'Half-height decorative glass', 'assets/product/entry/half-lite-640w.webp', 'half lite glass'],
+    ['3 Lite', 'entry-3-lite.html', 'Entry door', 'Mid-century, three horizontal lites', 'assets/product/entry/3-lite-640w.webp', 'three mid century modern'],
+    ['3/4 Lite', 'entry-3-4-lite.html', 'Entry door', 'Three-quarter decorative glass', 'assets/product/entry/3-4-lite-640w.webp', 'three quarter decorative glass'],
+    ['4 Lite', 'entry-4-lite.html', 'Entry door', 'Mid-century, four horizontal lites', 'assets/product/entry/4-lite-640w.webp', 'four mid century'],
+    ['Full Lite', 'entry-full-lite.html', 'Entry door', 'Large decorative glass', 'assets/product/entry/full-lite-640w.webp', 'full glass decorative'],
+    ['Narrow Lite', 'entry-narrow-lite.html', 'Entry door', 'Slim vertical glass', 'assets/product/entry/narrow-lite-640w.webp', 'narrow vertical modern'],
+    ['Contemporary Teak', 'entry-contemporary-teak.html', 'Entry door', 'Solid, architectural, teak-toned', 'assets/product/entry/teak-640w.webp', 'teak solid wood look oak'],
+    ['Craftsman', 'entry-craftsman.html', 'Entry door', 'Straight-edge panels and a glazing bead', 'assets/product/entry/craftsman-640w.webp', 'craftsman oak vintage'],
     ['Modern Full Lite', 'entry-modern-full-lite.html', 'Entry door', 'Full view or four-lite SDL grid', 'assets/product/entry/modern-full-lite.webp', 'modern full view black white'],
-    ['3/4 Oval Lite', 'entry-3-4-oval-lite.html', 'Entry door', 'Oval decorative glass', 'assets/product/entry/3-4-oval-lite.webp', 'oval decorative traditional'],
-    ['Patio Doors', 'patio-doors.html', 'Collection', 'Gliding and hinged patio doors', 'assets/product/gliding-2panel/lifestyle-living.webp', 'patio slider french all'],
-    ['Gliding Patio Doors', 'patio-gliding.html', 'Collection', 'Two gliding patio doors', 'assets/product/gliding-2panel/gbg.webp', 'gliding sliding slider'],
-    ['Hinged Patio Doors', 'patio-hinged.html', 'Collection', 'Three hinged patio doors, including impact', 'assets/product/full-lite-hinged/gbg.webp', 'hinged french swing'],
-    ['Full Lite Gliding', 'patio-2-panel-gliding.html', 'Patio door', '24 configurations · DP50', 'assets/product/gliding-2panel/gbg.webp', 'sliding two panel 2 panel slider'],
-    ['3/4 Lite Gliding', 'gliding-3-4-lite.html', 'Patio door', '20 configurations · 0.26 U-Factor', 'assets/product/gliding/gbg-6lite.webp', 'sliding slider three quarter'],
-    ['Full Lite Hinged', 'patio-full-lite-hinged.html', 'Patio door', '48 configurations · PG55', 'assets/product/full-lite-hinged/gbg.webp', 'french hinged swing'],
-    ['3/4 Lite Hinged', 'patio-3-4-lite-hinged.html', 'Patio door', '20 configurations · PG50', 'assets/product/3-4-lite-hinged/gbg.webp', 'french hinged three quarter'],
-    ['HVHZ Impact Full Lite Hinged', 'patio-impact-full-lite-hinged.html', 'Patio door', 'Florida impact · DP50', 'assets/product/impact-hinged/studio.webp', 'hurricane impact florida coastal hvhz miami dade'],
-    ['Why MP Doors', 'why-composite.html', 'About', 'Composite, HydroShield and certifications', 'assets/scene/craftsman-lifestyle.webp', 'composite material hydroshield energy star certification comparison wood steel'],
-    ['Real Projects', 'real-projects.html', 'Inspiration', 'Installations by climate and style', 'assets/scene/gliding-blinds-lifestyle.webp', 'projects gallery photos homes inspiration'],
-    ['Support & Guides', 'warranty-support.html', 'Support', 'Measure, install, care, warranty, FAQ', 'assets/scene/in-store.webp', 'warranty support care faq install measure contact help'],
-    ['How to measure a rough opening', 'blog.html#measure', 'Guide', 'Measure before you buy', 'assets/product/3-4-lite-hinged/lifestyle-room.webp', 'measure rough opening size width height'],
+    ['3/4 Oval Lite', 'entry-3-4-oval-lite.html', 'Entry door', 'Oval decorative glass', 'assets/product/entry/3-4-oval-lite-640w.webp', 'oval decorative traditional'],
+    ['Patio Doors', 'patio-doors.html', 'Collection', 'Gliding and hinged patio doors', 'assets/product/gliding-2panel/lifestyle-living-640w.webp', 'patio slider french all'],
+    ['Gliding Patio Doors', 'patio-gliding.html', 'Collection', 'Two gliding patio doors', 'assets/product/gliding-2panel/gbg-640w.webp', 'gliding sliding slider'],
+    ['Hinged Patio Doors', 'patio-hinged.html', 'Collection', 'Three hinged patio doors, including impact', 'assets/product/full-lite-hinged/gbg-640w.webp', 'hinged french swing'],
+    ['Full Lite Gliding', 'patio-2-panel-gliding.html', 'Patio door', '24 configurations · DP50', 'assets/product/gliding-2panel/gbg-640w.webp', 'sliding two panel 2 panel slider'],
+    ['3/4 Lite Gliding', 'gliding-3-4-lite.html', 'Patio door', '20 configurations · 0.26 U-Factor', 'assets/product/gliding/gbg-6lite-640w.webp', 'sliding slider three quarter'],
+    ['Full Lite Hinged', 'patio-full-lite-hinged.html', 'Patio door', '48 configurations · PG55', 'assets/product/full-lite-hinged/gbg-640w.webp', 'french hinged swing'],
+    ['3/4 Lite Hinged', 'patio-3-4-lite-hinged.html', 'Patio door', '20 configurations · PG50', 'assets/product/3-4-lite-hinged/gbg-640w.webp', 'french hinged three quarter'],
+    ['HVHZ Impact Full Lite Hinged', 'patio-impact-full-lite-hinged.html', 'Patio door', 'Florida impact · DP50', 'assets/product/impact-hinged/studio-640w.webp', 'hurricane impact florida coastal hvhz miami dade'],
+    ['Why MP Doors', 'why-composite.html', 'About', 'Composite, HydroShield and certifications', 'assets/scene/craftsman-lifestyle-640w.webp', 'composite material hydroshield energy star certification comparison wood steel'],
+    ['Real Projects', 'real-projects.html', 'Inspiration', 'Installations by climate and style', 'assets/scene/gliding-blinds-lifestyle-640w.webp', 'projects gallery photos homes inspiration'],
+    ['Support & Guides', 'warranty-support.html', 'Support', 'Help topics, contact form and phone', 'assets/scene/in-store.webp', 'warranty support care faq install measure contact help'],
+    ['How to measure a rough opening', 'blog.html#measure', 'Guide', 'Measure before you buy', 'assets/product/3-4-lite-hinged/lifestyle-room-640w.webp', 'measure rough opening size width height'],
     ['U-Factor and SHGC, in plain terms', 'blog.html#u-factor', 'Guide', 'Reading the energy label', 'assets/product/entry/craftsman-low-e.webp', 'energy u-factor shgc label low-e'],
-    ['What HVHZ approval certifies', 'blog.html#hvhz', 'Guide', 'High-velocity hurricane zones explained', 'assets/scene/coastal-16-9.webp', 'hvhz hurricane impact florida'],
-    ['Choosing decorative glass', 'blog.html#glass', 'Guide', 'Light in, privacy kept', 'assets/product/entry/3-4-oval-lite.webp', 'glass decorative privacy'],
+    ['What HVHZ approval certifies', 'blog.html#hvhz', 'Guide', 'High-velocity hurricane zones explained', 'assets/scene/coastal-16-9-640w.webp', 'hvhz hurricane impact florida'],
+    ['Choosing decorative glass', 'blog.html#glass', 'Guide', 'Light in, privacy kept', 'assets/product/entry/3-4-oval-lite-640w.webp', 'glass decorative privacy'],
     ['Contact us', 'warranty-support.html#contact', 'Support', '1-888-366-7717', 'assets/scene/in-store.webp', 'contact phone call email help']
   ];
   var dlg = null, input = null, list = null, sel = -1, results = [];
@@ -350,7 +350,7 @@
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>' +
       '<label class="sr" for="searchInput">Search doors, guides and support</label>' +
       '<input class="search__input" id="searchInput" type="search" autocomplete="off" placeholder="Search doors, guides, support" role="combobox" aria-expanded="true" aria-controls="searchList" aria-autocomplete="list">' +
-      '<button class="search__close" type="button" data-search-close>Esc</button></form>' +
+      '<button class="search__close" type="button" data-search-close aria-label="Close search"><span class="search__esc">Esc</span><span class="search__x">Close</span></button></form>' +
       '<ul class="search__list" id="searchList" role="listbox" aria-label="Results"></ul>' +
       '<p class="search__hint"><kbd>↑</kbd> <kbd>↓</kbd> to move, <kbd>Enter</kbd> to open. Press <kbd>/</kbd> anywhere to search.</p>';
     body.appendChild(dlg);

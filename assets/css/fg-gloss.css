@@ -1,0 +1,320 @@
+/* ==========================================================================
+   MP DOORS · GLOSS LAYER
+   Loads after fg.css. Changes surfaces only (light, edges, shadows), never
+   layout: no widths, heights, paddings, gaps or grid changes.
+
+   Everything is scoped under html.gloss so the layer can be switched on and
+   off as a whole. To ship it, add class="gloss" to <html> on every page and
+   load this file after fg.css.
+
+   Where the gloss goes, and where it does not:
+     polished   product cards, nav panels, mega menu tiles, FAQ keys,
+                footer, rail arrows
+     left matte hero and banner photos, body copy, series hero band,
+                CTA buttons (flat, as in fg.css)
+   A glass case reads as glass because the room around it is matte.
+   ========================================================================== */
+
+/* ---------- tokens ------------------------------------------------------- */
+:root {
+  --g-r: 6px;                                   /* polished radius (was 4px) */
+  --g-ring:   rgba(20, 20, 24, .08);            /* hairline edge at rest */
+  --g-ring-2: rgba(20, 20, 24, .14);            /* hairline edge, lifted */
+
+  /* layered shadows: contact, near, ambient */
+  --g-rest:
+    0 0 0 1px var(--g-ring),
+    0 1px 1px rgba(0, 0, 0, .03),
+    0 3px 6px -2px rgba(0, 0, 0, .05),
+    0 16px 28px -20px rgba(0, 0, 0, .20);
+  --g-lift:
+    0 0 0 1px var(--g-ring-2),
+    0 2px 2px rgba(0, 0, 0, .03),
+    0 10px 18px -8px rgba(0, 0, 0, .10),
+    0 36px 56px -28px rgba(0, 0, 0, .32);
+  --g-panel:
+    0 0 0 1px var(--g-ring),
+    0 2px 4px rgba(0, 0, 0, .04),
+    0 24px 48px -16px rgba(0, 0, 0, .22);
+
+  /* the light band that crosses a surface on hover */
+  --g-sweep: linear-gradient(105deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, .55) 45%,
+    rgba(255, 255, 255, .85) 50%,
+    rgba(255, 255, 255, .55) 55%,
+    rgba(255, 255, 255, 0) 100%);
+
+  /* enamel orange: lighter crown, logo orange body, deeper heel.
+     Ink text stays above 6.5:1 at the darkest point. */
+  --g-or-top: #F8AE58;
+  --g-or-mid: #F2962F;
+  --g-or-bot: #E8861A;
+
+  /* the showroom: product stage and floor */
+  --g-wall:  #FFFFFF;
+  --g-wall-2:#F8F8F9;
+  --g-floor: #F0F0F2;
+  --g-ground:#F4F4F5;   /* section ground under the product rail */
+}
+
+/* Wide gamut screens (Apple displays, most recent phones) get a richer
+   orange; everyone else keeps the sRGB values above. */
+@supports (color: color(display-p3 1 1 1)) {
+  :root {
+    --g-or-top: color(display-p3 .99 .70 .37);
+    --g-or-mid: color(display-p3 .97 .60 .22);
+    --g-or-bot: color(display-p3 .92 .53 .14);
+  }
+}
+
+/* ---------- 1. buttons -------------------------------------------------- */
+/* CTA buttons (.btn-o, .btn, .btn-d, .buy__cta) keep the fg.css style on
+   purpose: flat orange and flat ink. Only the small rail arrows are polished. */
+
+/* round rail arrows: small polished keys */
+.gloss .fg-round button {
+  background: linear-gradient(180deg, #FFFFFF, #F4F4F5);
+  box-shadow: inset 0 0 0 1.5px var(--orange), inset 0 2px 0 rgba(255, 255, 255, .9), 0 2px 6px -2px rgba(0, 0, 0, .18);
+  transition: background .25s var(--ease), box-shadow .25s var(--ease);
+}
+.gloss .fg-round button:hover:not(:disabled) {
+  background: linear-gradient(180deg, var(--g-or-top), var(--g-or-bot));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), 0 4px 10px -3px rgba(214, 112, 10, .55);
+}
+.gloss .fg-round button:disabled { background: #FFFFFF; box-shadow: inset 0 0 0 1.5px #DADADA; }
+
+/* ---------- 2. header + nav panels --------------------------------------- */
+.gloss .fg-hdr.is-scrolled { box-shadow: 0 1px 0 rgba(0, 0, 0, .05), 0 10px 24px -18px rgba(0, 0, 0, .25); }
+
+/* search pill: a recessed glass slot */
+.gloss .fg-search {
+  background: linear-gradient(180deg, #F7F7F8, #FFFFFF);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .07), 0 1px 0 rgba(255, 255, 255, .9);
+}
+
+/* dropdowns: a sheet of glass lifted off the page */
+.gloss .fg-drop {
+  border-color: transparent; border-radius: 8px;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FBFBFC 100%);
+  box-shadow: inset 0 1px 0 #FFFFFF, var(--g-panel);
+}
+.gloss .fg-drop a { transition: background .2s var(--ease), box-shadow .2s var(--ease); }
+.gloss .fg-drop a:hover {
+  background: linear-gradient(180deg, #F6F6F7, #EFEFF1);
+  box-shadow: inset 0 1px 0 #FFFFFF, inset 0 0 0 1px rgba(0, 0, 0, .04);
+}
+
+.gloss .fg-mega {
+  border-top-color: transparent;
+  background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFB 100%);
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, .06), 0 30px 50px -28px rgba(0, 0, 0, .32);
+}
+
+/* mega menu tiles: photos behind glass. The hover drops the flat orange
+   wash for a dark glass with an orange rule under the name.
+   Timing: the tile settles first, the name glides up and grows, the rule
+   draws in after it, and the light crosses slowly. Every change here is a
+   number the browser can animate (no jumps between auto and 0, no swap
+   between two gradients), so nothing snaps. */
+.gloss .fg-tile {
+  --t-move: .7s cubic-bezier(.22, .61, .36, 1);    /* name: gentle out */
+  --t-sweep: 1.8s cubic-bezier(.45, .05, .25, 1);  /* light: eases in and out */
+  border-radius: var(--g-r); isolation: isolate;
+  box-shadow: var(--g-rest);
+  transition: box-shadow .6s var(--ease), transform .6s var(--ease);
+}
+.gloss .fg-tile::before {                               /* glass edge + glare */
+  content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; border-radius: inherit;
+  background:
+    radial-gradient(220px circle at var(--mx, 15%) var(--my, -40%), rgba(255, 255, 255, .28), rgba(255, 255, 255, 0) 65%),
+    linear-gradient(160deg, rgba(255, 255, 255, .16) 0%, rgba(255, 255, 255, 0) 34%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .22), inset 0 1px 0 rgba(255, 255, 255, .45);
+}
+.gloss .fg-tile::after {                                /* sweep */
+  content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 40%; z-index: 3; pointer-events: none;
+  background: var(--g-sweep); opacity: .35;
+  transform: translateX(-140%) skewX(-18deg);
+}
+.gloss .fg-tile img { transition: transform 1.4s var(--ease), filter .8s var(--ease); }
+.gloss .fg-tile:hover, .gloss .fg-tile:focus-visible { transform: translateY(-2px); box-shadow: var(--g-lift); }
+.gloss .fg-tile:hover img, .gloss .fg-tile:focus-visible img { transform: scale(1.04); filter: brightness(.62) saturate(.92); }
+.gloss .fg-tile:hover::after, .gloss .fg-tile:focus-visible::after { transform: translateX(360%) skewX(-18deg); transition: transform var(--t-sweep) .08s; }
+
+/* The name box always fills the tile, so moving it is a padding change the
+   browser can ease. At rest the name sits at the bottom left as before; on
+   hover it rises to the middle (tile height is 127/300 of its width, so the
+   middle is 21.17% of the width up) and grows. */
+.gloss .fg-tile__t {
+  z-index: 1; inset: 0;
+  display: flex; align-items: flex-end;
+  padding: 0 14px 10px;
+  line-height: 1.3;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, .62) 100%);
+  transition: padding var(--t-move), font-size var(--t-move), line-height var(--t-move), color .4s var(--ease);
+}
+.gloss .fg-tile:hover .fg-tile__t, .gloss .fg-tile:focus-visible .fg-tile__t {
+  inset: 0; display: flex; align-items: flex-end;
+  padding: 0 30px calc(21.17% - .58em);
+  font-size: 1.55rem; line-height: 1.15;
+  color: #FFFFFF;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, .62) 100%);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .35);
+}
+.gloss .fg-tile__t::after {                             /* orange rule, drawn after the name lands */
+  content: ""; position: absolute; left: 30px; bottom: calc(50% - 1.05em); width: 44px; height: 2px;
+  background: linear-gradient(90deg, var(--g-or-top), var(--g-or-bot));
+  box-shadow: 0 0 10px rgba(242, 150, 47, .7);
+  transform: scaleX(0); transform-origin: left center; opacity: 0;
+  transition: transform .25s var(--ease), opacity .2s var(--ease);
+}
+.gloss .fg-tile:hover .fg-tile__t::after, .gloss .fg-tile:focus-visible .fg-tile__t::after {
+  transform: scaleX(1); opacity: 1;
+  transition: transform .6s var(--ease) .35s, opacity .3s var(--ease) .35s;
+}
+
+/* ---------- 3. series cards: photographs framed under glass ------------- */
+.gloss .fg-scard__img {
+  position: relative; isolation: isolate;
+  border-radius: var(--g-r);
+  box-shadow: var(--g-rest);
+  transition: box-shadow .45s var(--ease);
+}
+.gloss .fg-scard__img::before {
+  content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; border-radius: inherit;
+  background:
+    radial-gradient(420px circle at var(--mx, 12%) var(--my, -30%), rgba(255, 255, 255, .22), rgba(255, 255, 255, 0) 60%),
+    linear-gradient(158deg, rgba(255, 255, 255, .14) 0%, rgba(255, 255, 255, 0) 30%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .20), inset 0 1px 0 rgba(255, 255, 255, .5);
+}
+.gloss .fg-scard__img::after {
+  content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 35%; z-index: 3; pointer-events: none;
+  background: var(--g-sweep); opacity: .28;
+  transform: translateX(-150%) skewX(-16deg);
+}
+@media (hover: hover) {
+  .gloss .fg-scard:hover .fg-scard__img { box-shadow: var(--g-lift); }
+  .gloss .fg-scard:hover .fg-scard__img::after { transform: translateX(400%) skewX(-16deg); transition: transform 1.2s var(--ease); }
+}
+
+.gloss .fg-split__img {
+  position: relative; border-radius: var(--g-r); box-shadow: var(--g-rest);
+}
+.gloss .fg-split__img::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: inherit;
+  background: linear-gradient(158deg, rgba(255, 255, 255, .12) 0%, rgba(255, 255, 255, 0) 30%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .18), inset 0 1px 0 rgba(255, 255, 255, .45);
+}
+
+/* ---------- 4. product cards: the display case --------------------------- */
+/* a quiet showroom ground so the white cases have something to stand on */
+.gloss #featured, .gloss .fg-shop .fg-grid { background: transparent; }
+.gloss #featured { background: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 30%, var(--g-ground) 100%); }
+
+.gloss .fg-card {
+  position: relative; isolation: isolate; overflow: hidden;
+  border-color: transparent;                   /* keeps the 1px box, edge moves to the shadow */
+  border-radius: var(--g-r);
+  background: linear-gradient(180deg, #FFFFFF 0%, #FCFCFD 100%);
+  box-shadow: var(--g-rest);
+  transition: box-shadow .5s var(--ease), transform .5s var(--ease);
+}
+/* bevel: a bright top lip, a slightly darker heel */
+.gloss .fg-card::before {
+  content: ""; position: absolute; inset: 0; z-index: 4; pointer-events: none; border-radius: inherit;
+  box-shadow: inset 0 1px 0 #FFFFFF, inset 0 -1px 0 rgba(0, 0, 0, .035);
+}
+/* sweep across the whole case */
+.gloss .fg-card::after {
+  content: ""; position: absolute; top: -10%; bottom: -10%; left: 0; width: 38%; z-index: 3; pointer-events: none;
+  background: var(--g-sweep); opacity: .65;
+  transform: translateX(-160%) skewX(-16deg);
+}
+
+/* the stage: a lit wall, a floor, and a contact shadow under the door */
+.gloss .fg-card__img {
+  position: relative; isolation: isolate; overflow: hidden;
+  border-radius: 4px;
+  background:
+    linear-gradient(180deg, var(--g-wall) 0%, var(--g-wall-2) 86%, var(--g-floor) 90%, #F6F6F7 100%);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .025);
+}
+.gloss .fg-card__img img {
+  position: relative; z-index: 1;
+  mix-blend-mode: multiply;                    /* the photo's white backdrop takes the stage colour */
+  transition: transform .8s var(--ease);
+}
+.gloss .fg-card__img::after {                  /* contact shadow, sized for a single entry door */
+  content: ""; position: absolute; z-index: 0; pointer-events: none;
+  left: 29%; right: 29%; bottom: 7.6%; height: 5%;
+  background: radial-gradient(closest-side, rgba(0, 0, 0, .26), rgba(0, 0, 0, .08) 60%, rgba(0, 0, 0, 0));
+  transition: opacity .5s var(--ease), transform .5s var(--ease);
+}
+.gloss li[data-type="gliding"] .fg-card__img::after,
+.gloss li[data-type="hinged"] .fg-card__img::after,
+.gloss li[data-type="impact"] .fg-card__img::after { left: 15%; right: 15%; }
+/* light that follows the pointer, on the glass in front of the door */
+.gloss .fg-card__img::before {
+  content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, -20%), rgba(255, 255, 255, .5), rgba(255, 255, 255, 0) 60%);
+  opacity: 0; transition: opacity .5s var(--ease);
+}
+
+@media (hover: hover) {
+  .gloss .fg-card:hover { border-color: transparent; transform: translateY(-4px); box-shadow: var(--g-lift); }
+  .gloss .fg-card:hover::after { transform: translateX(420%) skewX(-16deg); transition: transform 1.1s var(--ease); }
+  .gloss .fg-card:hover .fg-card__img img { transform: translateY(-1.5%); }
+  .gloss .fg-card:hover .fg-card__img::after { opacity: .7; transform: scaleX(.92); }
+  .gloss .fg-card:hover .fg-card__img::before { opacity: 1; }
+}
+.gloss .fg-card:focus-visible { box-shadow: var(--g-lift); }
+
+/* ---------- 5. FAQ: closed keys polished, the open one lifted ------------ */
+.gloss .fg-acc {
+  border-color: transparent; border-radius: var(--g-r);
+  background: linear-gradient(180deg, #F9F9FA 0%, #F2F2F3 100%);
+  box-shadow: inset 0 1px 0 #FFFFFF, 0 0 0 1px var(--g-ring), 0 1px 2px rgba(0, 0, 0, .03);
+  transition: background .3s var(--ease), box-shadow .3s var(--ease);
+}
+@media (hover: hover) {
+  .gloss .fg-acc:not([open]):hover { background: linear-gradient(180deg, #FFFFFF 0%, #F5F5F6 100%); }
+}
+.gloss .fg-acc[open] {
+  background: #FFFFFF;
+  box-shadow: inset 0 1px 0 #FFFFFF, var(--g-rest);
+}
+
+/* ---------- 6. footer: piano black --------------------------------------- */
+.gloss .fg-ftr {
+  background:
+    radial-gradient(90% 70% at 50% 0%, rgba(255, 255, 255, .055), rgba(255, 255, 255, 0) 70%),
+    linear-gradient(180deg, #171717 0%, #0B0B0B 42%, #060606 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .07);
+}
+.gloss .fg-ftr__base { position: relative; border-top-color: transparent; }
+.gloss .fg-ftr__base::before {                 /* the orange rule becomes light on a glass edge */
+  content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 1px; pointer-events: none;
+  background: linear-gradient(90deg, rgba(242, 150, 47, 0) 0%, var(--g-or-mid) 22%, #FFD29C 50%, var(--g-or-mid) 78%, rgba(242, 150, 47, 0) 100%);
+  box-shadow: 0 0 12px rgba(242, 150, 47, .35);
+}
+.gloss .fg-ftr__form input {
+  background: linear-gradient(180deg, #EFEFF0, #FFFFFF 40%);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .28), 0 1px 0 rgba(255, 255, 255, .08);
+}
+.gloss .motion-toggle span[data-state] { background: linear-gradient(180deg, rgba(255, 255, 255, .10), rgba(255, 255, 255, 0)); }
+
+/* ---------- series and product pages (same language, no layout change) - */
+.gloss .fg-filter, .gloss .assurmini, .gloss .specblock, .gloss .glaze__card, .gloss .post {
+  border-color: transparent; box-shadow: inset 0 1px 0 #FFFFFF, var(--g-rest); border-radius: var(--g-r);
+}
+.gloss .fg-tilebox { border-color: transparent; border-radius: var(--g-r); box-shadow: inset 0 1px 0 #FFFFFF, var(--g-rest); transition: background .25s var(--ease), box-shadow .25s var(--ease), transform .25s var(--ease); }
+.gloss .fg-tilebox:hover { transform: translateY(-2px); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), var(--g-lift); }
+.gloss .gal__main { border-radius: var(--g-r); background: linear-gradient(180deg, var(--g-wall) 0%, var(--g-wall-2) 86%, var(--g-floor) 90%, #F6F6F7 100%); }
+
+/* ---------- motion: everything above rests still when asked ------------- */
+@media (prefers-reduced-motion: reduce) {
+  .gloss .fg-card::after, .gloss .fg-tile::after, .gloss .fg-scard__img::after { display: none; }
+  .gloss .fg-card:hover, .gloss .fg-tile:hover, .gloss .fg-tilebox:hover { transform: none; }
+}
+html.gloss[data-motion="off"] .fg-card::after, html.gloss[data-motion="off"] .fg-tile::after, html.gloss[data-motion="off"] .fg-scard__img::after { display: none; }
+html.gloss[data-motion="off"] .fg-card:hover, html.gloss[data-motion="off"] .fg-tile:hover, html.gloss[data-motion="off"] .fg-tilebox:hover { transform: none; }

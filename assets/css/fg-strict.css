@@ -1,0 +1,44 @@
+/* ==========================================================================
+   MP DOORS · FIGMA EDITION v2 · STRICT-TO-MOCK-UP ADDITIONS
+   Loaded after fg.css, which is unchanged. Styles only the elements v2 adds
+   so that each page matches Camille's wireframes; it does not restyle any
+   existing component.
+   ========================================================================== */
+
+/* Product pages carry the series sand band (screenshot 4). Its heading is an
+   h2, because the door's name is the page's h1; it takes the exact look of
+   the series band's h1 (fg.css: h1 base + .fg-band h1). */
+.fg-band .fg-band__h {
+  margin-top: 14px; max-width: 14ch;
+  font-size: clamp(2.1rem, 3.6vw, 2.75rem); font-weight: 700;
+  letter-spacing: -.02em; line-height: 1.15; text-wrap: balance;
+}
+
+/* "FILTER" above the product (screenshot 4): leads back to the series filter */
+.fg-pfilter {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 44px;
+  font-size: .78rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--ink);
+}
+.fg-pfilter svg { width: 14px; height: 14px; }
+.fg-pfilter:hover { color: var(--orange-ink); }
+.pdp > .fg-pfilter { margin-bottom: 14px; }
+
+/* the collapsible boxes under "Where to buy" (screenshot 4) */
+.buy .fg-acc-list { margin-top: 18px; }
+.buy .fg-acc__a .dl { margin-top: 4px; }
+.buy .fg-acc__a h3 { margin: 18px 0 6px; font-size: .9rem; }
+.buy .fg-acc__a .pending { margin: 4px 0 12px; }
+
+/* series sidebar: screenshot 3 starts at "Keywords"; the "Filter" heading
+   stays on phones only, where it opens and closes the panel */
+@media (min-width: 900px) { .fg-filter > summary { display: none; } .fg-filter__body { padding-top: 6px; } }
+
+/* demo: series page in the filter state (entry-doors-filter.html) */
+.fg-detail[hidden], .fg-shop[hidden] { display: none; }   /* fg.css sets display on .fg-shop, which would beat [hidden] */
+.fg-detail { padding-bottom: var(--sec); }
+.fg-detail .buy__title:focus { outline: none; }
+.fg-detail .buy__title:focus-visible { outline: 2px solid var(--orange-ink); outline-offset: 3px; }
+
+/* footer: the wireframe has brand, two link columns and the question block;
+   with the third column gone, the desktop grid drops from five tracks to four */
+@media (min-width: 1000px) { .fg-ftr__top { grid-template-columns: 1.4fr .8fr .8fr 1.6fr; } }

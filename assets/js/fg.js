@@ -9,6 +9,9 @@
    3. Footer "Do you have questions?": the address is handed to the Support
       contact form through sessionStorage, never through the URL.
    4. The filter panel starts closed on small screens.
+   5. Product pages on phones: a "Where to buy" bar slides up from the bottom
+      once the main button has scrolled out of view, and steps aside while
+      the closing "Where to buy" band or the footer is on screen.
    ========================================================================== */
 (function () {
   'use strict';
@@ -120,4 +123,36 @@
   function panels() { $all('details.fg-filter').forEach(function (d) { d.open = !small.matches; }); }
   panels();
   if (small.addEventListener) small.addEventListener('change', panels);
+
+  /* ---------- 5. product pages: sticky "Where to buy" on phones --------- */
+  var cta = document.querySelector('.buy .buy__cta');
+  var title = document.querySelector('.buy__title');
+  if (cta && 'IntersectionObserver' in window) {
+    var bar = document.createElement('div');
+    bar.className = 'fg-stickybuy';
+    var t = document.createElement('span');
+    t.className = 'fg-stickybuy__t';
+    t.textContent = title ? clean(title.textContent) : '';
+    var go = document.createElement('a');
+    go.className = 'btn';
+    go.href = cta.href.replace('utm_content=buy', 'utm_content=sticky-bar');
+    go.rel = 'noopener';
+    go.setAttribute('data-cta', 'buy-sticky');
+    go.textContent = clean(cta.textContent);
+    bar.appendChild(t); bar.appendChild(go);
+    document.body.appendChild(bar);
+    var past = false, blocked = 0;
+    function show() { bar.classList.toggle('is-on', past && blocked === 0); }
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) { past = !e.isIntersecting && e.boundingClientRect.top < 0; });
+      show();
+    }).observe(cta);
+    // stand aside where another "Where to buy" is already in view
+    var seen = new Set();
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) seen.add(e.target); else seen.delete(e.target); });
+      blocked = seen.size; show();
+    });
+    $all('main > .section.night:last-child, .fg-ftr').forEach(function (el) { io.observe(el); });
+  }
 })();

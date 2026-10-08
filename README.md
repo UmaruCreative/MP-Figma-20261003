@@ -7,6 +7,15 @@ a search field, a "Door Series" panel, series tabs, a sand hero band with a
 filter sidebar on the series pages, dropdown options and a dark "Where to buy"
 button on product pages, grey FAQ accordions and a black footer.
 
+**v2 (8 October 2026): strictly to the wireframes.** Every page that has a
+wireframe (homepage, the four series pages, the 15 product pages, Support)
+shows only what Camille drew; anything else was removed. Product specs and
+warranty terms live in the two boxes under "Where to buy", and each product
+page has its own five-question FAQ. `entry-doors-filter.html` demonstrates the
+alternative in wireframe 4: door details shown in place on the series page.
+Styles added for v2 are in `assets/css/fg-strict.css`; `fg.css` is unchanged.
+Full record: `../MP-Doors-Website-Figma-CHANGELOG.txt`, entry v2.0.
+
 Deliberate departures from the design, agreed before the build:
 - The orange buttons keep the logo orange but use near-black text (7.2:1);
   white on orange would be 2.25:1 and fail WCAG AA.
@@ -16,6 +25,9 @@ Deliberate departures from the design, agreed before the build:
   Patio Doors, Gliding, Hinged, HVHZ Impact), not to new series names.
 - The product button reads "Where to buy", not "Purchase": doors are sold at
   The Home Depot.
+- Form fields and the search pill use `--field` (#8A8A8A, 3.4:1) for their
+  borders and `--grey` (5.3:1) for placeholders; the Figma values were 1.18:1
+  and 2.10:1. Product cards use the darker `--line-2` edge.
 
 Static HTML, no build step, no framework, no package
 manager. Static HTML, no build step, no framework, no package
@@ -176,3 +188,10 @@ wide) and, for wide photographs, a half-width `name-NNNw.webp` offered through
 `srcset`. The original `.jpg` and `.png` files stay beside them because the
 JSON-LD `image` fields and social cards point at the originals. When you add a
 photograph, export a WebP next to it and reference the WebP in the page.
+Large images also have a 640px `name-640w.webp` for phones, listed first in
+`srcset`; give every `srcset` a `sizes` that matches the displayed width.
+
+On phones, product pages show a "Where to buy" bar built by `fg.js` from the
+page's `.buy__cta` link (its `utm_content` becomes `sticky-bar`). Design
+history and every change since the Figma wireframes are recorded in
+`../MP-Doors-Website-Figma-CHANGELOG.txt`.
